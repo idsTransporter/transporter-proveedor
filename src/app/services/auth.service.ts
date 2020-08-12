@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-//Modulo de firebase(suthentication) y router(secuencia).
+//Modulo de firebase(authentication) y router(secuencia).
 import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
+import { isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,29 @@ export class AuthService {
     }
     catch (err) {
       console.error('ERROR> En la auth. Linea 42 in auth.service.ts' + err);
+    }
+  }
+
+  /**
+   * Usa el obj AFauth para enviar un correo de recuperacion de contraseña al proveedor que lo solicita.
+   * Nota: Se puede personalizar el mensaje enviado desde firebase/console/authentication
+   * Pdt: Para probar se recomienda usar un email temporal, debidamente registrado como usuario.
+   * @param correo_recuperacion (del proveedor) destino donde se enviara el mensaje
+   */
+  reset_password(correo_recuperacion:string){
+    if(isNullOrUndefined(correo_recuperacion) || correo_recuperacion==""){
+      alert("Debe ingresar un correo electronico.")
+    }else{
+      this.AFauth.sendPasswordResetEmail(correo_recuperacion)
+      .then(
+        (res)=>{
+        console.log("Exito!!! se envio")
+        }
+      ).catch(
+        (err) => {
+          console.error("ERROR> Linea 66 auth.service " + err)
+        }
+      )  
     }
   }
 }
