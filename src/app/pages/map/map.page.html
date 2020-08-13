@@ -1,9 +1,13 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>map</ion-title>
+    <ion-title>
+      MAPA 
+      <ion-toggle id="toggle" (ionChange)="toggleValue($event)"></ion-toggle>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+ <div id="map"></div>
+ <div id="indicators"></div>
 </ion-content>
