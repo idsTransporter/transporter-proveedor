@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <ion-img class="icon" src="assets/imgs/logo.png">
   </ion-img>
@@ -19,5 +19,10 @@
   <ion-button expand="block" (click)="on_submit_login()">
     Iniciar Sesion
   </ion-button>
+  <div class="ion-text-center ion-margin-top">
+    <a routerLink= "/reset-password">
+      <small>Olvide mi contrasenia? Recuperar Contrasenia</small>
+    </a>
+  </div>
 
 </ion-content>
