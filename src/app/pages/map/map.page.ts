@@ -1,73 +1,69 @@
 import { Component, OnInit } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LoadingController } from '@ionic/angular';
+
 declare var google;
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
-  styleUrls: ['./map.page.scss'],
+  styleUrls: ['./map.page.scss']
 })
 
 
 export class MapPage implements OnInit {
-  map=null;
-  onOf=true;
+  map = null;
 
-  
-  directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
-  
-  origin = { lat: -2.140495, lng: -79.906420 };
+  constructor(
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController
+  ) {
 
-  destination = { lat: -2.148250, lng: -79.965180 };
-
-  constructor() {
   }
 
-  ngOnInit(){
-      this.toggleValue;
-      this.loadMap();
+  ngOnInit() {
+    this.loadMap();
+  }
 
-  } 
-
-  loadMap() {
-    // create a new map by passing HTMLElement
+  //Cargar el mapa, llama a la funcion getLocation para obtener longitud y latitud del usuario y los pasa 
+  //para renderizar el mapa utilizando la variable map(Valores y detalles del mapa)
+  async loadMap() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
+    const myLatLng = await this.getLocation();
     const mapEle: HTMLElement = document.getElementById('map');
-    const indicatorsEle: HTMLElement = document.getElementById('indicators');
-
-    // create map
     this.map = new google.maps.Map(mapEle, {
-      center: this.origin,
-      zoom: 12
+      center: myLatLng,
+      zoom: 17,
+      zoomControl:false,
+      mapTypeControl:false,
+      streetViewControl:false,
+      fullscreenControl:false
     });
-    this.directionsDisplay.setMap(this.map);
-    this.directionsDisplay.setPanel(indicatorsEle);
-
-  
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      mapEle.classList.add('show-map');
-      this.calculateRoute();
-    });
-    
-  }
-
-  private calculateRoute(){
-    this.directionsService.route({
-      origin: this.origin,
-      destination: this.destination,
-      travelMode: google.maps.TravelMode.DRIVING,
-    }, (response, status)  => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        this.directionsDisplay.setDirections(response);
-      } else {
-        alert('No se pudo cargar el mapa ' + status);
-      }
+    google.maps.event
+    .addListenerOnce(this.map, 'idle', () => {
+      loading.dismiss();
+      this.addMaker(myLatLng.lat, myLatLng.lng);
     });
   }
-  
-  toggleValue(event):void{
-    const isChecked: HTMLElement = document.getElementById('toggle');
-    const value=isChecked.getAttribute("aria-checked");
-    console.log(value);
+
+  //Agrega un marcador al punto que se le pasa y lo dibuja en el mapa, recibe los paramatros de latitud y longitud
+  private addMaker(lat: number, lng: number) {
+    const marker = new google.maps.Marker({
+      position: { lat, lng },
+      map: this.map,
+      title: 'Transporter'
+    });
   }
 
+
+  //Funcion para obtener la localizacion, devuelve dos valores (latitud y longitud)
+  private async getLocation() {
+    const myPosition = await this.geolocation.getCurrentPosition();
+    console.log(myPosition.coords.latitude+myPosition.coords.longitude);
+    return {
+      lat: myPosition.coords.latitude,
+      lng: myPosition.coords.longitude
+    };
+  };
 }
