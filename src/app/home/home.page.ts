@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from "../services/auth.service";
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  
   notificaciones: any []=Array(20); 
   constructor(
     private AFauth: AuthService
   ) {}
+  
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
 
   on_logout(){
     this.AFauth.logout();
