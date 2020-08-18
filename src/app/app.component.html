@@ -1,3 +1,33 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <div  class="menu-header-bg">
+      <div class="menu-header-content">  
+        <h2>Menu</h2>
+      </div>
+      </div>  
+    </ion-header>
+
+    <ion-content>
+      <ion-list class="menu-items" lines="none">
+        <ion-item>
+          <ion-icon name="play-circle-outline"></ion-icon>Iniciar Servicio
+        </ion-item>
+        <ion-item>
+          <ion-icon name="stop-circle-outline"></ion-icon>Finalizar Servicio
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call-outline"></ion-icon>Llamar cliente
+        </ion-item>
+        <ion-item>
+          <ion-icon name="chatbubbles-outline"></ion-icon>Chat Cliente
+        </ion-item>
+        <ion-item>
+          <ion-icon name="reader-outline"></ion-icon>Reportar Anomalías
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
