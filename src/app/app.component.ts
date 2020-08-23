@@ -53,7 +53,8 @@ export class AppComponent implements OnInit {
 
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
-        alert('Push registration success, token: ' + token.value);
+        //alert('Push registration success, token: ' + token.value);
+        this.presentAlert(token.value)
       }
     );
 
@@ -66,14 +67,24 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
         //alert('Push received: ' + JSON.stringify(notification));
-        this.presentAlert()
+        //notification -> JSON con toda la infor de la not.Push
+        /*
+        {
+          id:''
+          data:''
+          title:''
+          body:''
+        }
+        */
+        this.presentAlertConfirm(notification)
       }
     );
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
-        this.presentAlert()
+
+        this.presentAlertConfirm(notification)
       }
     );
   }
@@ -86,7 +97,58 @@ export class AppComponent implements OnInit {
     });
   }
 
-  //Alerts
+  async presentAlert(identificacion: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Registro de Notificaciones',
+      subHeader: 'Listo para recibir Servicios!!!',
+      message: 'ID> '+identificacion,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirm(notification) {
+    let title=notification.title
+    let inicio=notification.data.inicio
+    let fin=notification.data.fin
+    let hora=notification.data.hora
+    let metodoPago=notification.data.metodoPago
+    let valor=notification.data.valor
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `<strong> ${title} </strong>`,
+      message: `<div>
+        <p><strong>Pto. de Partida: </strong>${inicio}</p>
+        <p><strong>Pto. de LLegada: </strong>${fin}</p>
+        <p><strong>Hora: </strong>${hora}</p>
+        <p><strong>Metodo de Pago: </strong>${metodoPago}</p><
+        p><strong>Valor: </strong>$${valor}</p>
+      </div>`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+  /*
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -111,31 +173,7 @@ export class AppComponent implements OnInit {
     await alert.present();
   }
 
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
+  
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -349,4 +387,5 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
+*/
 }
