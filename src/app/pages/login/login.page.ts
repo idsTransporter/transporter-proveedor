@@ -21,10 +21,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  on_submit_login(){
+  async on_submit_login(){
     console.log("Dio click al iniciar sesion");
     //Cachar la promise del service/auth
-    this.auth_service.login(this.correo_electronico,this.contrasenia)
+     await this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
       res => this.router.navigate(['/home'])
     ).catch(

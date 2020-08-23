@@ -19,12 +19,12 @@ export class HomePage implements OnInit {
     throw new Error("Method not implemented.");
   }
 
-  on_logout(){
-    this.AFauth.logout();
+  async on_logout(){
+    await this.AFauth.logout();
   }
 
-  loadData(event) {
-    setTimeout(() => {
+  async loadData(event) {
+    await setTimeout(() => {
       console.log('Done');
       event.target.complete();
 
