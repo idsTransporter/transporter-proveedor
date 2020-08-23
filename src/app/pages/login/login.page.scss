@@ -2,5 +2,29 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+
     width: 50%;
+}
+
+.boton{
+    --background: #312a8a;  
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    }
+
+.content-items{
+    width: 100%;
+    position: fixed;
+    align-items: center;
+    margin-top: 25%;
+    padding-left: 3%;
+    padding-right: 3%;
+    
+}
+.content-link{
+    text-align: center;
+    color: #312a8a;
+    text-decoration: none;    
+
 }

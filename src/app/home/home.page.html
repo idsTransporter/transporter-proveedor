@@ -1,44 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Bienvenido
-    </ion-title>
-  </ion-toolbar>
-
-</ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="avatar-background">   
     <ion-avatar class="avatar-content">  
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"> 
+    <img src="assets/imgs/user.png"> 
     </ion-avatar>  
   </div>
 
-  <ion-grid class="buttons-content ion-align-self-center">
-    <ion-row>
-      <ion-col>
-        <ion-button>
-          <ion-icon name="person"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button routerLink="/map">
-          <ion-icon name="car"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button>
-          <ion-icon name="build"></ion-icon>
-        </ion-button>
-      </ion-col>
 
-      <ion-col>
-        <ion-button (click)="on_logout()">
-          <ion-icon name="exit-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="buttons-content">
+    <div>
+      <ion-button>
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div>
+      <ion-button routerLink="/map">
+        <ion-icon name="car"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div>
+      <ion-button>
+        <ion-icon name="build"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div >
+      <ion-button (click)="on_logout()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>  
+  
 <ion-item class="notification-content">
     <ion-text> Notificaciones</ion-text>
     <ion-icon name="notifications-outline" slot="start"></ion-icon>

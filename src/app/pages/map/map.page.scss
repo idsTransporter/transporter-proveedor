@@ -26,3 +26,9 @@ ion-content {
     --handle-background: #92949c;
     --handle-background-checked: #d7d8da;
   }
+
+  .toolbar-content{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
