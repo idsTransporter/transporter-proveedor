@@ -15,6 +15,10 @@ import {
 
 const { PushNotifications } = Plugins;
 
+//Alertas de manera local
+import { AlertController } from '@ionic/angular';
+//Compartir la data a traves de un service
+import { ShareDataService } from './services/share-data.service';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +26,13 @@ const { PushNotifications } = Plugins;
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public alertController: AlertController,
+    private shareData: ShareDataService
   ) {
     this.initializeApp();
   }
@@ -50,7 +57,8 @@ export class AppComponent implements OnInit {
 
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
-        alert('Push registration success, token: ' + token.value);
+        //alert('Push registration success, token: ' + token.value);
+        this.presentAlert(token.value)
       }
     );
 
@@ -62,13 +70,27 @@ export class AppComponent implements OnInit {
 
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
-        alert('Push received: ' + JSON.stringify(notification));
+        //alert('Push received: ' + JSON.stringify(notification));
+        //notification -> JSON con toda la infor de la not.Push
+        /*
+        {
+          id:''
+          data:''
+          title:''
+          body:''
+        }
+        */
+        //this.shareData.notificacion=JSON.stringify(notification)
+        this.shareData.notificacion = typeof(notification)
+        this.presentAlertConfirm(notification)
       }
     );
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
+        //alert('Push action performed: ' + JSON.stringify(notification));
+        this.shareData.notificacion=JSON.stringify(notification)
+        this.presentAlertConfirm(notification)
       }
     );
   }
@@ -80,4 +102,298 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
     });
   }
+
+  async presentAlert(identificacion: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Registro de Notificaciones',
+      subHeader: 'Listo para recibir Peticiones de Servicios!!!',
+      message: 'ID> '+identificacion,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirm(notification) {
+
+
+    let title=notification.title
+    let inicio=notification.data.inicio
+    let fin=notification.data.fin
+    let hora=notification.data.hora
+    let metodoPago=notification.data.metodoPago
+    let valor=notification.data.valor
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `${title}`,
+      message: `<div>
+        <p><strong>Pto. de Partida: </strong>${inicio}</p>
+        <p><strong>Pto. de LLegada: </strong>${fin}</p>
+        <p><strong>Hora: </strong>${hora}</p>
+        <p><strong>Metodo de Pago: </strong>${metodoPago}</p>
+        <p><strong>Valor: </strong>$${valor}</p>
+      </div>`,
+      buttons: [
+        {
+          text: 'Omitir',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+  /*
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertMultipleButtons() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['Cancel', 'Open Modal', 'Delete']
+    });
+
+    await alert.present();
+  }
+
+  
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Prompt!',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Placeholder 1'
+        },
+        {
+          name: 'name2',
+          type: 'text',
+          id: 'name2-id',
+          value: 'hello',
+          placeholder: 'Placeholder 2'
+        },
+        // multiline input.
+        {
+          name: 'paragraph',
+          id: 'paragraph',
+          type: 'textarea',
+          placeholder: 'Placeholder 3'
+        },
+        {
+          name: 'name3',
+          value: 'http://ionicframework.com',
+          type: 'url',
+          placeholder: 'Favorite site ever'
+        },
+        // input date with min & max
+        {
+          name: 'name4',
+          type: 'date',
+          min: '2017-03-01',
+          max: '2018-01-12'
+        },
+        // input date without min nor max
+        {
+          name: 'name5',
+          type: 'date'
+        },
+        {
+          name: 'name6',
+          type: 'number',
+          min: -5,
+          max: 10
+        },
+        {
+          name: 'name7',
+          type: 'number'
+        },
+        {
+          name: 'name8',
+          type: 'password',
+          placeholder: 'Advanced Attributes',
+          cssClass: 'specialClass',
+          attributes: {
+            maxlength: 4,
+            inputmode: 'decimal'
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertRadio() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Radio',
+      inputs: [
+        {
+          name: 'radio1',
+          type: 'radio',
+          label: 'Radio 1',
+          value: 'value1',
+          checked: true
+        },
+        {
+          name: 'radio2',
+          type: 'radio',
+          label: 'Radio 2',
+          value: 'value2'
+        },
+        {
+          name: 'radio3',
+          type: 'radio',
+          label: 'Radio 3',
+          value: 'value3'
+        },
+        {
+          name: 'radio4',
+          type: 'radio',
+          label: 'Radio 4',
+          value: 'value4'
+        },
+        {
+          name: 'radio5',
+          type: 'radio',
+          label: 'Radio 5',
+          value: 'value5'
+        },
+        {
+          name: 'radio6',
+          type: 'radio',
+          label: 'Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 ',
+          value: 'value6'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertCheckbox() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Checkbox',
+      inputs: [
+        {
+          name: 'checkbox1',
+          type: 'checkbox',
+          label: 'Checkbox 1',
+          value: 'value1',
+          checked: true
+        },
+
+        {
+          name: 'checkbox2',
+          type: 'checkbox',
+          label: 'Checkbox 2',
+          value: 'value2'
+        },
+
+        {
+          name: 'checkbox3',
+          type: 'checkbox',
+          label: 'Checkbox 3',
+          value: 'value3'
+        },
+
+        {
+          name: 'checkbox4',
+          type: 'checkbox',
+          label: 'Checkbox 4',
+          value: 'value4'
+        },
+
+        {
+          name: 'checkbox5',
+          type: 'checkbox',
+          label: 'Checkbox 5',
+          value: 'value5'
+        },
+
+        {
+          name: 'checkbox6',
+          type: 'checkbox',
+          label: 'Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6',
+          value: 'value6'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+*/
 }

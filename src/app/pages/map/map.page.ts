@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 declare var google;
+
+//Servicio para compartir data
+import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-map',
@@ -20,7 +24,7 @@ export class MapPage implements OnInit {
 
   destination = { lat: -2.148250, lng: -79.965180 };
 
-  constructor() {
+  constructor(public shareData: ShareDataService) {
   }
 
   ngOnInit(){

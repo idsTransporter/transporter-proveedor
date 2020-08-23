@@ -21,14 +21,15 @@ ion-content {
 
   ion-toggle {
     --background:#d7d8da;
-    --background-checked: #28ba62;
-  
+    --background-checked: #28ba62;  
     --handle-background: #92949c;
     --handle-background-checked: #d7d8da;
+    
   }
 
   .toolbar-content{
     display: flex;
-    align-items: center;
-    justify-items: center;
+    align-self: start;
+   
+       
   }
