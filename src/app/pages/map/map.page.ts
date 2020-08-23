@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var google;
 
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
