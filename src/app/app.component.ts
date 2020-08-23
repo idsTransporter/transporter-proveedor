@@ -17,6 +17,8 @@ const { PushNotifications } = Plugins;
 
 //Alertas de manera local
 import { AlertController } from '@ionic/angular';
+//Compartir la data a traves de un service
+import { ShareDataService } from './services/share-data.service';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +26,13 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
+    private shareData: ShareDataService
   ) {
     this.initializeApp();
   }
@@ -76,6 +80,8 @@ export class AppComponent implements OnInit {
           body:''
         }
         */
+        //this.shareData.notificacion=JSON.stringify(notification)
+        this.shareData.notificacion = typeof(notification)
         this.presentAlertConfirm(notification)
       }
     );
@@ -83,7 +89,7 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
-
+        this.shareData.notificacion=JSON.stringify(notification)
         this.presentAlertConfirm(notification)
       }
     );
@@ -101,7 +107,7 @@ export class AppComponent implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Registro de Notificaciones',
-      subHeader: 'Listo para recibir Servicios!!!',
+      subHeader: 'Listo para recibir Peticiones de Servicios!!!',
       message: 'ID> '+identificacion,
       buttons: ['OK']
     });
@@ -110,6 +116,8 @@ export class AppComponent implements OnInit {
   }
 
   async presentAlertConfirm(notification) {
+
+
     let title=notification.title
     let inicio=notification.data.inicio
     let fin=notification.data.fin
@@ -119,17 +127,17 @@ export class AppComponent implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `<strong> ${title} </strong>`,
+      header: `${title}`,
       message: `<div>
         <p><strong>Pto. de Partida: </strong>${inicio}</p>
         <p><strong>Pto. de LLegada: </strong>${fin}</p>
         <p><strong>Hora: </strong>${hora}</p>
-        <p><strong>Metodo de Pago: </strong>${metodoPago}</p><
-        p><strong>Valor: </strong>$${valor}</p>
+        <p><strong>Metodo de Pago: </strong>${metodoPago}</p>
+        <p><strong>Valor: </strong>$${valor}</p>
       </div>`,
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Omitir',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
@@ -137,7 +145,7 @@ export class AppComponent implements OnInit {
 
           }
         }, {
-          text: 'Okay',
+          text: 'Aceptar',
           handler: () => {
             console.log('Confirm Okay');
           }
