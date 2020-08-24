@@ -50,6 +50,8 @@ export class HomePage implements OnInit {
     this.notificacionesBD.forEach((not:notification) => {
       
         this.notificacionesShow.push(not);
+        
+        this.notificacionesShow.push(not);
       
     });
   }
