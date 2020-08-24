@@ -15,16 +15,16 @@ export class HomePage implements OnInit {
     private AFauth: AuthService
   ) {}
   
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
+  ngOnInit(){
+    
   }
 
-  async on_logout(){
-    await this.AFauth.logout();
+  on_logout(){
+    this.AFauth.logout();
   }
 
-  async loadData(event) {
-    await setTimeout(() => {
+  loadData(event) {
+    setTimeout(() => {
       console.log('Done');
       event.target.complete();
 

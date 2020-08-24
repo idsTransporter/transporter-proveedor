@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service'
 import {Router} from '@angular/router'
 
+//Importar el Ctrl de Toast (Feedback)
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,21 +18,55 @@ export class LoginPage implements OnInit {
 
   constructor(
     private auth_service: AuthService, 
-    public router:Router 
+    public router:Router,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
   }
 
-  async on_submit_login(){
+  on_submit_login(){
     console.log("Dio click al iniciar sesion");
     //Cachar la promise del service/auth
-     await this.auth_service.login(this.correo_electronico,this.contrasenia)
+    this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
       res => this.router.navigate(['/home'])
     ).catch(
-      err => alert("Usuario/cotrasenia incorrectos")
+      err => this.presentToastFeedbackWithOptions(err)
     );
   }
 
+  
+  async presentToastFeedback() {
+    const toast = await this.toastController.create({
+      message: 'Usuario/cotrasenia incorrectos',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async presentToastFeedbackWithOptions(err) {
+    const toast = await this.toastController.create({
+      header: 'Usuario/cotrasenia incorrectos',
+      message: err,
+      position: 'top',
+      buttons: [
+        {
+          side: 'start',
+          icon: 'star',
+          text: 'Favorite',
+          handler: () => {
+            console.log('Favorite clicked');
+          }
+        }, {
+          text: 'Done',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
 }

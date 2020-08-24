@@ -3,6 +3,8 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { DetalleServicioService } from '../../services/detalle-servicio.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+//Servicio para compartir data
+import { ShareDataService } from 'src/app/services/share-data.service';
 declare var google;
 
 @Component({
@@ -28,6 +30,7 @@ export class DetallePage implements OnInit {
     private launchNavigator: LaunchNavigator,
     private detalleServicio:DetalleServicioService,
     private geolocation: Geolocation,
+    public shareData: ShareDataService
     ) {
   }
 
