@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      DETALLE {{shareData.notificacion}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <div id="map"></div>
+ <div className="collapse navbar-collapse" id="detallesRuta">
+   <h5>INFORMACION DEL SERVICIO</h5>
+   <button (click)="getTask()">getTask()</button>
+  </div>
+  <ul>
+    <li>Nombre : <input id="name" disabled></li>
+    <li>Hora : <input id="hora" disabled></li>
+    <li>Precio : <input id="precio" disabled></li>
+  </ul>
+  <button (click)="updateTask()">Aceptar servicio</button>
+</ion-content>

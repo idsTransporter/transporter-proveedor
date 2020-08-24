@@ -15,8 +15,8 @@ export class HomePage implements OnInit {
     private AFauth: AuthService
   ) {}
   
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
+  ngOnInit(){
+    
   }
 
   on_logout(){
