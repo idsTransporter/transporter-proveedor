@@ -1,5 +1,6 @@
 
-<ion-content [fullscreen]="true">
+
+<ion-content [fullscreen]="true" class="content">
   <div class="avatar-background">   
     <ion-avatar class="avatar-content">  
     <img src="assets/imgs/user.png"> 
@@ -32,12 +33,23 @@
       </ion-button>
     </div>
   </div>  
-  
-<ion-item class="notification-content">
+
+</ion-content>
+
+<ion-content class="scroll-content">   
+  <ion-item class="notification-content">
     <ion-text> Notificaciones</ion-text>
     <ion-icon name="notifications-outline" slot="start"></ion-icon>
   </ion-item>
 
+  <ion-virtual-scroll  [items]="notificacionesShow" approxItemHeight="300px">
+    <ion-card *virtualItem="let not;" >
+      <ion-card-header>
+      <ion-card-title>{{ not.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{not.cuerpo }}</ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll>
+</ion-content> 
 
-
-</ion-content>
+ 
