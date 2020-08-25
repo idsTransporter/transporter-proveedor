@@ -30,6 +30,11 @@ const routes: Routes = [
     path:'detalle',
     loadChildren:()=> import('./pages/detalle-servicio/detalle-routing.module').then(m => m.DetallePageRoutingModule)
   },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  }
+  
 ];
 
 @NgModule({
