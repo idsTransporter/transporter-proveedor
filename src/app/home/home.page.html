@@ -1,69 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Bienvenido
-    </ion-title>
-  </ion-toolbar>
 
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-item class="icon">
-    <ion-avatar slot="start">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
-  </ion-item>
-  <div>
-    <ion-button class="button">
-      <ion-icon name="person"></ion-icon>
-    </ion-button>
-    <ion-button class="button" routerLink="/map">
-      <ion-icon name="car"></ion-icon>
-    </ion-button>
-    <ion-button class="button" routerLink="/detalle">
-      <ion-icon name="build"></ion-icon>
-    </ion-button>
-    <ion-button (click)="on_logout()">
-      <ion-icon name="exit-outline"></ion-icon>
-    </ion-button>
+<ion-content class="content">
+  <div class="avatar-background">   
+    <ion-avatar class="avatar-content">  
+    <img src="assets/imgs/user.png"> 
+    </ion-avatar>  
   </div>
 
-  <ion-grid class="buttons-content ion-align-self-center">
-    <ion-row>
-      <ion-col>
-        <ion-button>
-          <ion-icon name="person"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button routerLink="/map">
-          <ion-icon name="car"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button>
-          <ion-icon name="build"></ion-icon>
-        </ion-button>
-      </ion-col>
 
-      <ion-col>
-        <ion-button (click)="on_logout()">
-          <ion-icon name="exit-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-<ion-item class="notification-content">
+  <div class="buttons-content">
+    <div>
+      <ion-button>
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div>
+      <ion-button routerLink="/map">
+        <ion-icon name="car"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div>
+      <ion-button>
+        <ion-icon name="build"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div >
+      <ion-button (click)="on_logout()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>  
+
+  <ion-item class="notification-content">
     <ion-text> Notificaciones</ion-text>
     <ion-icon name="notifications-outline" slot="start"></ion-icon>
   </ion-item>
 
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Cargando...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-  
 </ion-content>
+
+<ion-content class="scroll">    
+
+  <ion-virtual-scroll  [items]="notificacionesShow" approxItemHeight="300px">
+    <ion-card *virtualItem="let not;" >
+      <ion-card-header>
+      <ion-card-title>{{ not.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{not.cuerpo }}</ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll>
+</ion-content> 
+
+ 

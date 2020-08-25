@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from "../services/auth.service";
 
+export interface notification{
+  titulo:string;
+  cuerpo:string;
+}
+
 
 @Component({
   selector: 'app-home',
@@ -10,29 +15,50 @@ import { AuthService } from "../services/auth.service";
 })
 export class HomePage implements OnInit {
   
-  notificaciones: any []=Array(20); 
+  notificacionesShow=[];
+  //reemplazar por mensajes de la BD
+  notificacionesBD:notification []=[
+    {
+      titulo:"Prueba1",
+      cuerpo:"Cuerpo de la notificación"
+    },  
+    {
+      titulo:"Prueba2",
+      cuerpo:"Cuerpo de la notificación"
+    },
+    {
+      titulo:"Prueba3",
+      cuerpo:"Cuerpo de la notificación"
+    },
+    {
+      titulo:"Prueba4",
+      cuerpo:"Cuerpo de la notificación"
+    },
+    {
+      titulo:"Prueba5",
+      cuerpo:"Cuerpo de la notificación"
+    }
+  ];
+
+  
+  
   constructor(
     private AFauth: AuthService
   ) {}
   
   ngOnInit(){
-    
+    this.notificacionesBD.forEach((not:notification) => {
+      
+        this.notificacionesShow.push(not);
+        
+        this.notificacionesShow.push(not);
+      
+    });
   }
 
   on_logout(){
     this.AFauth.logout();
   }
 
-  loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
 
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.notificaciones.length == 20) {
-        event.target.disabled = true;
-      }
-    }, 50);
-  }
 }
