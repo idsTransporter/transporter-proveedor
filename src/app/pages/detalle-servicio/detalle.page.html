@@ -1,14 +1,23 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      DETALLE {{shareData.notificacion}}
-    </ion-title>
+  <ion-toolbar >
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button slot="start"></ion-menu-button>
+      </ion-button>
+
+      <ion-title>
+        DETALLE {{shareData.notificacion}}
+      </ion-title>
+   
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
  <div id="map"></div>
- <div className="collapse navbar-collapse" id="detallesRuta">
+
+
+ <!--<div className="collapse navbar-collapse" id="detallesRuta">
    <h5>INFORMACION DEL SERVICIO</h5>
    <button (click)="getTask()">getTask()</button>
   </div>
@@ -17,5 +26,22 @@
     <li>Hora : <input id="hora" disabled></li>
     <li>Precio : <input id="precio" disabled></li>
   </ul>
-  <button (click)="updateTask()">Aceptar servicio</button>
+  <button (click)="updateTask()">Aceptar servicio</button>-->
+
+  <ion-card  id="detallesRuta">
+    <ion-card-header class="header-card">
+      <ion-card-title>INFORMACIÓN DEL SERVICIO</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ul>
+        <li>Nombre : <input id="name" disabled></li>
+        <li>Hora : <input id="hora" disabled></li>
+        <li>Precio : <input id="precio" disabled></li>        
+      </ul>
+      <ion-button (click)="updateTask()" class="accept-button">Aceptar servicio</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <button (click)="getTask()">getTask()</button>
 </ion-content>

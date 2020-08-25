@@ -25,3 +25,20 @@ ion-content {
     --handle-background: #92949c;
     --handle-background-checked: #d7d8da;
   }
+
+  .accept-button{
+    --background: #312a8a;  
+    width: 100%; 
+    
+  }
+
+  .header-card{
+    text-align: center;
+    
+  }
+
+  .toolbar-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
