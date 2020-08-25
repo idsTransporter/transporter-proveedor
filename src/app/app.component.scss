@@ -1,0 +1,30 @@
+.menu-header-bg{
+    height: 150px;
+    width: 350px;
+    
+    background: linear-gradient(#20f1f6,#57ffb7)
+ 
+
+}
+.menu-header-content{
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+
+}
+
+.menu-items{
+    margin:0px;
+    ion-icon{
+        margin-right: 20px;
+        color: gray;
+    }
+
+    ion-item{
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+
+}

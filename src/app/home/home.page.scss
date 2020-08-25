@@ -26,14 +26,56 @@
   text-decoration: none;
 }
 
-.button {
- --border-radius: 50%;
+
+.avatar-background{
+  background-color:#acabab;   
+  height: 250px;
+  display: flex; 
+}
+
+.avatar-content{
+  
+  width: 150px;
+  height: 150px; 
+  position: relative;
+  margin-top: 10%; 
+  margin-left: 30%;    
   
 }
 
-.icon{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  
+
+
+.buttons-content{      
+    width: auto;
+    height: 100px;    
+      
+    ion-button{
+      margin-left: 10px auto;       
+      margin-top:20%;                
+      --background: #56d7da;
+      --color-activated: #5bf7b3;
+      --border-radius:50%; 
+      width:50px;
+      height: 50px;
+    }
+
+    ion-icon{
+      color: whitesmoke;
+    }
+} 
+
+
+.notification-content{
+  --background:#d3d1d1; 
+  --border-color: #b1b1b1;
+  width: auto;
+  height: 75px;
+  display: flex;
+  ion-text{
+    color: #000;
+  }
+  ion-icon{
+    color:black;
+  }
+
 }
