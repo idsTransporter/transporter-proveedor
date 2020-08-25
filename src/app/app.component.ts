@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
         }
         */
         //this.shareData.notificacion=JSON.stringify(notification)
-        this.shareData.notificacion = typeof(notification)
+        this.shareData.notificacion = notification
         this.presentAlertConfirm(notification)
       }
     );
@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
-        this.shareData.notificacion=JSON.stringify(notification)
+        this.shareData.notificacion=notification
         this.presentAlertConfirm(notification)
       }
     );
