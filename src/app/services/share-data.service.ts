@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ShareDataService {
 
   //notificacion:{}=null;
-  notificacion: string ='notificacion...'
+  notificacion: object ={};
 
   constructor() { }
 }
