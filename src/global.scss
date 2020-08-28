@@ -24,3 +24,33 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.toolbar-content{
+    display: flex;
+    flex-direction: row;
+    width: full;
+    padding-right: 5%;
+    align-items: center;
+    
+    ion-title{
+      font-weight: 100;
+      font-size: 14px;
+      align-self: center;
+      
+    }
+
+    ion-avatar{
+        padding: 0%;
+        width: 30px;
+        height: 30px;
+        align-self: end;
+        justify-self: center;
+        
+
+    }
+    
+  }
+
+  .toolbar-bg{
+    --background: linear-gradient(#20478c ,#2485c9);
+  }
