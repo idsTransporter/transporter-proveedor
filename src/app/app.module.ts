@@ -17,6 +17,7 @@ import {AngularFireModule} from '@angular/fire'
 import {AngularFireAuthModule} from '@angular/fire/auth'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
+import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    ComponentsModule,
   ],
   providers: [
     StatusBar,
