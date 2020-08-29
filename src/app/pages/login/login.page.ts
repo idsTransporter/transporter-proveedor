@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     .then(//Respuesta positiva
       res => this.router.navigate(['/home'])
     ).catch(
-      err => this.presentToastFeedbackWithOptions(err)
+      err => this.presentToastFeedback()
     );
   }
 
