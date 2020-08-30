@@ -1,7 +1,10 @@
 export interface DetalleServicio {
-    id:string,
-    name:string,
-    username:string,
-    email:string,
-    phone:string
+    inicio:{
+        lat:string,
+        lng:string
+    },
+    fin:{
+        lat:string,
+        lng:string
+    }
 }

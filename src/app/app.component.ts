@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {Router} from '@angular/router';
+import { DetalleServicioService } from './services/detalle-servicio.service';
 
 
 //Para las push notifications
@@ -10,7 +12,7 @@ import {
   Plugins,
   PushNotification,
   PushNotificationToken,
-  PushNotificationActionPerformed 
+  PushNotificationActionPerformed,
 } from '@capacitor/core';
 
 const { PushNotifications } = Plugins;
@@ -32,7 +34,9 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
-    private shareData: ShareDataService
+    private shareData: ShareDataService,
+    public router:Router,
+    public detalle:DetalleServicioService
   ) {
     this.initializeApp();
   }
@@ -94,7 +98,7 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
+ 
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -115,15 +119,19 @@ export class AppComponent implements OnInit {
     await alert.present();
   }
 
+ 
+
   async presentAlertConfirm(notification) {
 
+    let title=notification.title;
+    let inicio=notification.data.inicio;
+    let fin=notification.data.fin;
+    let hora=notification.data.hora;
+    let metodoPago=notification.data.metodoPago;
+    let valor=notification.data.valor;
+    this.detalle.inicio=notification.data.inicio;
+    this.detalle.fin=notification.data.fin;
 
-    let title=notification.title
-    let inicio=notification.data.inicio
-    let fin=notification.data.fin
-    let hora=notification.data.hora
-    let metodoPago=notification.data.metodoPago
-    let valor=notification.data.valor
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -147,6 +155,7 @@ export class AppComponent implements OnInit {
         }, {
           text: 'Aceptar',
           handler: () => {
+            this.router.navigate(['/detalle'])
             console.log('Confirm Okay');
           }
         }
@@ -155,4 +164,5 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
+  
 }

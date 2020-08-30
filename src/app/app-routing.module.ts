@@ -33,7 +33,11 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },  {
+    path: 'service-map',
+    loadChildren: () => import('./pages/service-map/service-map.module').then( m => m.ServiceMapPageModule)
   }
+
   
 ];
 
