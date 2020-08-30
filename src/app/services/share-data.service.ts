@@ -11,5 +11,10 @@ export class ShareDataService {
 
   //Es un Observable
   nombreNot$=new EventEmitter<string>();
+
+
+  //Es un observable
+  notObj$=new EventEmitter<object>();
+
   constructor() { }
 }

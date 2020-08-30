@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Subscription } from 'rxjs';
+
 declare var google;
 
 @Component({
@@ -30,6 +31,10 @@ export class DetallePage implements OnInit,OnDestroy {
   nombreNot: string ="";
   nombreNotSubs: Subscription;
 
+
+  notObj: object={};
+  notObjSub: Subscription;
+
   constructor(
     private launchNavigator: LaunchNavigator,
     private detalleServicio:DetalleServicioService,
@@ -40,6 +45,7 @@ export class DetallePage implements OnInit,OnDestroy {
   ngOnDestroy(){
     console.log("*** DESTROY DETALLESS")
     this.nombreNotSubs.unsubscribe();
+    this.notObjSub.unsubscribe();
   }
 
   ngOnInit(){
@@ -49,6 +55,13 @@ export class DetallePage implements OnInit,OnDestroy {
         console.log('*****',noti,typeof(noti));
         //console.log('*****',noti,typeof(noti.data.inicio));
 
+      }
+    );
+
+    this.notObjSub=this.shareData.notObj$.subscribe(
+      notificacionObj => {
+        console.log('>>>>> ',notificacionObj);
+        this.notObj=notificacionObj;
       }
     );
       this.loadMap();
