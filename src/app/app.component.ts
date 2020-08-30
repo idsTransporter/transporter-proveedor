@@ -81,6 +81,18 @@ export class AppComponent implements OnInit {
         }
         */
         //this.shareData.notificacion=JSON.stringify(notification)
+        console.log(typeof(notification))//object
+        console.log(typeof(notification.data))//object
+        console.log(typeof(notification.data.inicio))//string
+        let ini=JSON.parse(notification.data.inicio);
+        console.log('>>>',typeof(ini));//object
+        console.log(ini.lat,typeof ini.lat)
+        console.log(ini.lng,typeof ini.lng)
+        
+        
+        this.shareData.nombreNot$.emit(JSON.stringify(notification));
+
+
         this.shareData.notificacion = notification
         this.presentAlertConfirm(notification)
       }
