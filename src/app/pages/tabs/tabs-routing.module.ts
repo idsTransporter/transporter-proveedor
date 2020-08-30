@@ -6,28 +6,31 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/map',
+    redirectTo: '/tabs/map',
     pathMatch: 'full'
   },
+  
   {
     path: '',
     component: TabsPage,
     children:[
       {
         path: 'message',
-        loadChildren: '../message/message.module#MessagePageModule'
+        loadChildren: () => import('../message/message.module').then( m => m.MessagePageModule)
       },
       {
         path: 'notification',
-        loadChildren: '../notification/notification.module#NotificationPageModule'
+       
+        loadChildren: () => import('../notification/notification.module').then( m => m.NotificationPageModule)
       },
       {
         path: 'chat',
-        loadChildren: '../chat/chat.module#ChatPageModule'
+        loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)
+       
       },
       {
         path: 'map',
-        loadChildren: '../map/map.module#MapPageModule'
+        loadChildren: () => import('../map/map.module').then( m => m.MapPageModule)
       }
     ]
 

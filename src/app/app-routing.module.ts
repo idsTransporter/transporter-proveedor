@@ -14,18 +14,19 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/map',
+    redirectTo: 'tabs', 
     pathMatch: 'full'
+    
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate:[NotloginGuard],
   },
-  {
+  /*{
     path: 'map',
     loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
-  },
+  },*/
   {
     path:'detalle',
     loadChildren:()=> import('./pages/detalle-servicio/detalle-routing.module').then(m => m.DetallePageRoutingModule)
@@ -48,7 +49,8 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+    canActivate: [AuthGuard],   
   }
 
   

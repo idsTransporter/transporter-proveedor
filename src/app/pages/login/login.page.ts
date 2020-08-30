@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
     //Cachar la promise del service/auth
     this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
-      res => this.router.navigate(['/home'])
+      res => this.router.navigate(['/tabs'])
     ).catch(
       err => this.presentToastFeedbackWithOptions(err)
     );
