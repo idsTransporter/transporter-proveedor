@@ -26,20 +26,38 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .toolbar-content{
+<<<<<<< HEAD
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: full;
     padding-right: 5%;
     align-items: center;
+=======
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: full;
+  padding-right: 5%;
+  
+  
+  ion-title{
+    font-weight: 100;
+    font-size: 14px;
+>>>>>>> 8d0356d8464942bbb6720ca2b50f0fdff51af156
     
-    ion-title{
-      font-weight: 100;
-      font-size: 14px;
+    
+  }
+  
+  ion-avatar{
+      
+      width: 30px;
+      height: 30px;
+      justify-self: flex-end;
       align-self: center;
       
-    }
 
+<<<<<<< HEAD
     ion-avatar{
         padding: 0%;
         width: 30px;
@@ -49,8 +67,25 @@
 
     }
     
+=======
+>>>>>>> 8d0356d8464942bbb6720ca2b50f0fdff51af156
   }
+  
+}
+
 
   .toolbar-bg{
     --background: linear-gradient(#20478c ,#2485c9);
+  }
+
+  .center-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    width: 50%;
+    height: 50%;
+
+    
   }

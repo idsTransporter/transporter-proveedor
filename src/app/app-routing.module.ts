@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/tabs/map',
     pathMatch: 'full'
   },
   {
@@ -33,7 +33,28 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./pages/message/message.module').then( m => m.MessagePageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   }
+<<<<<<< HEAD
+=======
+
+  
+>>>>>>> 8d0356d8464942bbb6720ca2b50f0fdff51af156
 ];
 
 @NgModule({
