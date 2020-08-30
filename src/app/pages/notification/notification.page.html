@@ -14,6 +14,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-</ion-content>
+<ion-content class="scroll">    
+
+  <ion-virtual-scroll  [items]="notificacionesShow" approxItemHeight="300px">
+    <ion-card *virtualItem="let not;" >
+      <ion-card-header>
+      <ion-card-title>{{ not.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{not.cuerpo }}</ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll>
+</ion-content> >
