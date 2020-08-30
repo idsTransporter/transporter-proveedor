@@ -65,6 +65,7 @@ export class DetallePage implements OnInit,OnDestroy {
       }
     );
       this.loadMap();
+      console.log(this.notObj['inicio']);
 
   } 
 
