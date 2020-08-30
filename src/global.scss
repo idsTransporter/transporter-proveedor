@@ -24,3 +24,54 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.toolbar-content{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: full;
+    padding-right: 5%;
+    align-items: center;
+
+  
+  
+  ion-title{
+    font-weight: 100;
+    font-size: 14px;
+
+    color:white;
+    justify-self: center;
+
+  }
+  ion-avatar{
+      
+      width: 30px;
+      height: 30px;
+      justify-self: flex-end;
+      align-self: center;
+                
+
+    }
+    
+
+  
+}
+
+
+  .toolbar-bg{
+    --background: linear-gradient(#20478c ,#2485c9);
+  }
+
+  .center-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    width: 50%;
+    height: 50%;
+
+    
+  }
+

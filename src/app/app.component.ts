@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from "./services/auth.service";
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -28,6 +28,7 @@ import { ShareDataService } from './services/share-data.service';
 export class AppComponent implements OnInit {
 
   constructor(
+    private AFauth: AuthService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -188,4 +189,9 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
+
+  on_logout(){
+    this.AFauth.logout();
+  }
+
 }
