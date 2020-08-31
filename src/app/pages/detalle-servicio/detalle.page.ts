@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 import { DetalleServicioService } from '../../services/detalle-servicio.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -24,7 +24,7 @@ export class DetallePage implements OnInit,OnDestroy {
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   
-  origin = { lat: -2.140495, lng: -79.906420 };
+  origin = { lat: -2.148250, lng: -79.965125 };
 
   destination = { lat: -2.148250, lng: -79.965180 };
 
@@ -48,24 +48,28 @@ export class DetallePage implements OnInit,OnDestroy {
     this.notObjSub.unsubscribe();
   }
 
+  ionViewWillEnter(){
+    console.log("ionViewDidEnter")
+    
+}
   ngOnInit(){
     this.nombreNotSubs=this.shareData.nombreNot$.subscribe(
       noti => {
         this.nombreNot=noti
         console.log('*****',noti,typeof(noti));
-        //console.log('*****',noti,typeof(noti.data.inicio));
-
       }
     );
-
     this.notObjSub=this.shareData.notObj$.subscribe(
       notificacionObj => {
         console.log('>>>>> ',notificacionObj);
         this.notObj=notificacionObj;
+        this.origin=this.notObj['inicio'];
+        this.destination=this.notObj['fin'];
       }
-    );
-      this.loadMap();
+    ); 
+    console.log("CHANGES°12134°");
 
+    this.loadMap();
   } 
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
@@ -85,21 +89,39 @@ export class DetallePage implements OnInit,OnDestroy {
     });
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setPanel(indicatorsEle);
-
-  
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+    /*google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
-      this.calculateRoute();
-    });
-    
+      //this.calculateRoute();
+    });*/ 
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      this.origin=this.shareData.notificacion.data.inicio;
+      this.destination=this.shareData.notificacion.data.fin;
+     /* console.log("origen DID "+or);
+      console.log("destino DID"+de);
+      */mapEle.classList.add('show-map');
+      this.calculateRoute(this.origin,this.destination);
+      console.log("MOOSTROS");
+    });    
+    console.log("CHANGEFIN");
   }
 
     //Realiza el calculo de la mejor ruta, utiliza los valores de origen y destino| se le debe pasar el modo
     //de viaje que se realiza en este caso DRIVING
-  private calculateRoute(){
+  private calculateRoute(ini:any,fin:any){
+    console.log("ROUTEORIGNE "+ini);
+    console.log("ROUTEDES"+fin);
+    let u1=ini.replace(/"/g,'');
+    let u2=fin.replace(/"/g,'');
+    console.log("ReeplaceU2 "+JSON.parse(ini));
+    console.log("ReeplaceU1 "+u2);
+    console.log("origin lat"+u1.lat);
+    console.log("origin lng"+u1.lng);
+    console.log("dest lat"+u2.lat);
+    console.log("dest lng"+u2.lng);
+    
     this.directionsService.route({
-      origin: this.origin,
-      destination: this.destination,
+      origin: JSON.parse(ini) ,
+      destination: JSON.parse(fin),
       travelMode: google.maps.TravelMode.DRIVING,
     }, (response, status)  => {
       if (status === google.maps.DirectionsStatus.OK) {

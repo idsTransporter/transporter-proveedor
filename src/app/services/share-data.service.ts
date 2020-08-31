@@ -7,7 +7,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class ShareDataService {
 
   //notificacion:{}=null;
-  notificacion: object ={};
+  notificacion: any={};
 
   //Es un Observable
   nombreNot$=new EventEmitter<string>();
