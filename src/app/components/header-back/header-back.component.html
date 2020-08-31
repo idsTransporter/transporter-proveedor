@@ -1,12 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start" >
-<ion-back-button defaultHref="/" text="" icon="chevron-back-outline">
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/tabs/map" text="" icon="chevron-back-outline">
+        
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title text-capitalize>
+        {{title}}
+      </ion-title>
+      
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
 
-</ion-back-button>
-    </ion-buttons>
-    <ion-title text-capitalize>
-{{title}}
-    </ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
+
