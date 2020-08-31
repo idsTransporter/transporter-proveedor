@@ -7,7 +7,7 @@
       </ion-button>
 
       <ion-title>
-        DETALLE {{nombreNot}}
+        DETALLE
       </ion-title>
    
     </div>
@@ -24,7 +24,11 @@
   
     <ion-card-content>
       <ul>
- 
+        <li>Inicio : {{shareData.notificacion.data.inicio}}</li>
+        <li>Fin : {{shareData.notificacion.data.fin}}</li>
+        <li>Metodo de pago : {{shareData.notificacion.data.metodoPago}}</li>
+        <li>Hora : {{shareData.notificacion.data.hora}}</li>
+        <li>Precio : {{shareData.notificacion.data.valor}}</li>
       </ul>
       <ion-button (click)="updateTask()" class="accept-button">Aceptar servicio</ion-button>
     </ion-card-content>

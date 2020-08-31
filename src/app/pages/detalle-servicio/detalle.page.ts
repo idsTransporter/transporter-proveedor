@@ -53,22 +53,6 @@ export class DetallePage implements OnInit,OnDestroy {
     
 }
   ngOnInit(){
-    this.nombreNotSubs=this.shareData.nombreNot$.subscribe(
-      noti => {
-        this.nombreNot=noti
-        console.log('*****',noti,typeof(noti));
-      }
-    );
-    this.notObjSub=this.shareData.notObj$.subscribe(
-      notificacionObj => {
-        console.log('>>>>> ',notificacionObj);
-        this.notObj=notificacionObj;
-        this.origin=this.notObj['inicio'];
-        this.destination=this.notObj['fin'];
-      }
-    ); 
-    console.log("CHANGES°12134°");
-
     this.loadMap();
   } 
 
@@ -89,36 +73,17 @@ export class DetallePage implements OnInit,OnDestroy {
     });
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setPanel(indicatorsEle);
-    /*google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      mapEle.classList.add('show-map');
-      //this.calculateRoute();
-    });*/ 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.origin=this.shareData.notificacion.data.inicio;
       this.destination=this.shareData.notificacion.data.fin;
-     /* console.log("origen DID "+or);
-      console.log("destino DID"+de);
-      */mapEle.classList.add('show-map');
+      mapEle.classList.add('show-map');
       this.calculateRoute(this.origin,this.destination);
-      console.log("MOOSTROS");
     });    
-    console.log("CHANGEFIN");
   }
 
     //Realiza el calculo de la mejor ruta, utiliza los valores de origen y destino| se le debe pasar el modo
     //de viaje que se realiza en este caso DRIVING
-  private calculateRoute(ini:any,fin:any){
-    console.log("ROUTEORIGNE "+ini);
-    console.log("ROUTEDES"+fin);
-    let u1=ini.replace(/"/g,'');
-    let u2=fin.replace(/"/g,'');
-    console.log("ReeplaceU2 "+JSON.parse(ini));
-    console.log("ReeplaceU1 "+u2);
-    console.log("origin lat"+u1.lat);
-    console.log("origin lng"+u1.lng);
-    console.log("dest lat"+u2.lat);
-    console.log("dest lng"+u2.lng);
-    
+  private calculateRoute(ini:any,fin:any){  
     this.directionsService.route({
       origin: JSON.parse(ini) ,
       destination: JSON.parse(fin),
