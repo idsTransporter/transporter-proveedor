@@ -1,24 +1,6 @@
+<app-header-back title="Solicitud de servicio"></app-header-back>
 
-<ion-header [translucent]="true">
-  <ion-toolbar class="toolbar-bg">
-    <div class="toolbar-content">
-      <ion-button fill="clear" slot="start">
-        <ion-menu-button slot="start"></ion-menu-button>
-      </ion-button>
-
-      <ion-title>
-        SOLICITUD DE SERVICIO   {{nombreNot}}
-      </ion-title>
-
-      <ion-avatar>
-        <img src="assets/icon/avatar.png">
-      </ion-avatar>
-
-    </div>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
+<ion-content >
   <div id="map"></div>
 
 
@@ -31,22 +13,29 @@
     <li>Hora : <input id="hora" disabled></li>
     <li>Precio : <input id="precio" disabled></li>
   </ul>
-  <button (click)="updateTask()">Aceptar servicio</button>-->
+  <button (click)="updateTask()">Aceptar servicio</button>
 
   <ion-card id="detallesRuta">
-    <ion-card-header class="header-card">
-      <ion-card-title>INFORMACIÓN DEL SERVICIO</ion-card-title>
-    </ion-card-header>
-
+    <ion-card-header >
+      <div class="header-card">
+      INFORMACIÓN DEL SERVICIO
+      </div>
+    </ion-card-header >   
     <ion-card-content>
-      <ul>
-        <li>Nombre : <input id="name" disabled></li>
-        <li>Hora : <input id="hora" disabled></li>
-        <li>Precio : <input id="precio" disabled></li>
-      </ul>
-      <ion-button (click)="updateTask()" class="accept-button">Aceptar servicio</ion-button>
+      <div id="body-content">
+        <p><strong>Pto. de Partida: </strong>inicio</p>
+        <p><strong>Pto. de LLegada: </strong>fin</p>
+        <p><strong>Hora: </strong>hora</p>
+        <p><strong>Fecha: </strong>fecha</p>
+        <p><strong>Valor: </strong>valor</p>
+        <p><strong>Metodo de Pago: </strong>metodoPago</p>
+        
+      </div>
+      <ion-button class="btn-no">NO</ion-button>
+      <ion-button (click)="updateTask()" class="secondary">SI</ion-button>
+      
     </ion-card-content>
   </ion-card>
 
-  <button (click)="getTask()">getTask()</button>
+  <button (click)="getTask()">getTask()</button>-->
 </ion-content>

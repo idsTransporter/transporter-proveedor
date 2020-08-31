@@ -161,8 +161,8 @@ export class AppComponent implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `${title}`,
-      message: `<div>
+      header: `<div id="header-card">${title}</div>`,
+      message: `<div id="body-content">
         <p><strong>Pto. de Partida: </strong>${inicio}</p>
         <p><strong>Pto. de LLegada: </strong>${fin}</p>
         <p><strong>Hora: </strong>${hora}</p>
@@ -171,15 +171,16 @@ export class AppComponent implements OnInit {
       </div>`,
       buttons: [
         {
-          text: 'Omitir',
+          text: 'NO',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'btn-no',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
 
           }
         }, {
-          text: 'Aceptar',
+          text: 'SI',
+          cssClass: 'btn-si',
           handler: () => {
             console.log('Confirm Okay');
           }

@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { DetallePageRoutingModule } from './detalle-routing.module';
-
-import { DetallePage } from './detalle.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { DetallePage } from './detalle.page';
+
 
 
 @NgModule({
@@ -16,8 +16,11 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     DetallePageRoutingModule,
-    ComponentsModule,
+    ComponentsModule
   ],
   declarations: [DetallePage]
 })
 export class DetallePageModule {}
+
+
+
