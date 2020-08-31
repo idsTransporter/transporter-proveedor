@@ -15,6 +15,8 @@ import {
 
 const { PushNotifications } = Plugins;
 
+import { Router } from '@angular/router';
+
 //Alertas de manera local
 import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
@@ -33,7 +35,8 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
-    private shareData: ShareDataService
+    private shareData: ShareDataService,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -123,8 +126,30 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
+        
+        if (notification.notification.data) {
+          this.router.navigateByUrl('/detalles');
+          let origin=JSON.parse(notification.notification.data.inicio);
+        console.log('Inicio> ',typeof(origin))//object
+        console.log('Inicio> ',typeof(origin.lat))
+        let destiny=JSON.parse(notification.notification.data.fin);
+        console.log('Fin> ',typeof(destiny.lng))
+
+        let notObjeto = {
+          'title':notification.notification.title,
+          'inicio':origin,
+          'fin':destiny,
+          'hora':notification.notification.data.hora,
+          'metodoPago':notification.notification.data.metodoPago,
+          'valor':notification.notification.data.valor,
+        }
+
+       
         this.shareData.notificacion=notification
         this.presentAlertConfirm(notification)
+        }
+        
+        
       }
     );
   }

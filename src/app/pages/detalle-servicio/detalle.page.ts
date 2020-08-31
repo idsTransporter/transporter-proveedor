@@ -62,10 +62,11 @@ export class DetallePage implements OnInit,OnDestroy {
       notificacionObj => {
         console.log('>>>>> ',notificacionObj);
         this.notObj=notificacionObj;
+        
       }
     );
       this.loadMap();
-      console.log(this.notObj['inicio']);
+      
 
   } 
 
