@@ -74,31 +74,6 @@ export class AppComponent implements OnInit {
 
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
-        //alert('Push received: ' + JSON.stringify(notification));
-        //notification -> JSON con toda la infor de la not.Push
-        /*
-        {
-          id:''
-          data:''
-          title:''
-          body:''
-        }
-        */
-        //this.shareData.notificacion=JSON.stringify(notification)
-        // console.log(typeof(notification))//object
-        // console.log(typeof(notification.data))//object
-        // console.log(typeof(notification.data.inicio))//string
-        // let ini=JSON.parse(notification.data.inicio);
-        // console.log('>>>',typeof(ini));//object
-        // console.log(ini.lat,typeof ini.lat)//number
-        // console.log(ini.lng,typeof ini.lng)//number
-        // let fin=JSON.parse(notification.data.fin);
-        // console.log('>>>',typeof(fin));//object
-        // console.log(fin.lat,typeof fin.lat)//number
-        // console.log(fin.lng,typeof fin.lng)//number
-
-        //notificacio.data.inicio llega como String
-        //Por eso es necesario castear
         let origin=JSON.parse(notification.data.inicio);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
@@ -128,12 +103,12 @@ export class AppComponent implements OnInit {
         //alert('Push action performed: ' + JSON.stringify(notification));
         
         if (notification.notification.data) {
-          this.router.navigateByUrl('/detalles');
+          this.router.navigate(['/home'])
           let origin=JSON.parse(notification.notification.data.inicio);
-        console.log('Inicio> ',typeof(origin))//object
-        console.log('Inicio> ',typeof(origin.lat))
-        let destiny=JSON.parse(notification.notification.data.fin);
-        console.log('Fin> ',typeof(destiny.lng))
+          console.log('Inicio> ',typeof(origin))//object
+          console.log('Inicio> ',typeof(origin.lat))
+          let destiny=JSON.parse(notification.notification.data.fin);
+          console.log('Fin> ',typeof(destiny.lng))
 
         let notObjeto = {
           'title':notification.notification.title,
@@ -148,8 +123,6 @@ export class AppComponent implements OnInit {
         this.shareData.notificacion=notification
         this.presentAlertConfirm(notification)
         }
-        
-        
       }
     );
   }
@@ -186,7 +159,7 @@ export class AppComponent implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `<div id="header-card">${title}</div>`,
+      header: `<h1 id="header-card">${title}</h1>`,
       message: `<div id="body-content">
         <p><strong>Pto. de Partida: </strong>${inicio}</p>
         <p><strong>Pto. de LLegada: </strong>${fin}</p>
@@ -208,6 +181,7 @@ export class AppComponent implements OnInit {
           cssClass: 'btn-si',
           handler: () => {
             console.log('Confirm Okay');
+            this.router.navigate(['/detalle'])
           }
         }
       ]
