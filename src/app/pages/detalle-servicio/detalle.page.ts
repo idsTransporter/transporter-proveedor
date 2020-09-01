@@ -65,13 +65,13 @@ export class DetallePage implements OnInit,OnDestroy {
   } 
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
-  loadMap() {
+  async loadMap() {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('mapa');
     const indicatorsEle: HTMLElement = document.getElementById('indicators');
 
     // create map
-    this.map = new google.maps.Map(mapEle, {
+    this.map = await new google.maps.Map(mapEle, {
       center: this.origin,
       zoom: 17,
       zoomControl:false,
@@ -79,9 +79,8 @@ export class DetallePage implements OnInit,OnDestroy {
       streetViewControl:false,
       fullscreenControl:false
     });
-    this.directionsDisplay.setMap(this.map);
-    this.directionsDisplay.setPanel(indicatorsEle);
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+    await this.directionsDisplay.setMap(this.map);
+    await google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.origin=this.shareData.notificacion.data.inicio;
       this.destination=this.shareData.notificacion.data.fin;
       mapEle.classList.add('show-map');
