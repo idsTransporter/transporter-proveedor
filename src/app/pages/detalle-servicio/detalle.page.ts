@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 import { DetalleServicioService } from '../../services/detalle-servicio.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -24,7 +24,7 @@ export class DetallePage implements OnInit,OnDestroy {
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   
-  origin = { lat: -2.140495, lng: -79.906420 };
+  origin = { lat: -2.148250, lng: -79.965125 };
 
   destination = { lat: -2.148250, lng: -79.965180 };
 
@@ -48,25 +48,13 @@ export class DetallePage implements OnInit,OnDestroy {
     this.notObjSub.unsubscribe();
   }
 
+  ionViewWillEnter(){
+    console.log("ionViewDidEnter")
+    
+}
   ngOnInit(){
-    this.nombreNotSubs=this.shareData.nombreNot$.subscribe(
-      noti => {
-        this.nombreNot=noti
-        console.log('*****',noti,typeof(noti));
-        //console.log('*****',noti,typeof(noti.data.inicio));
 
-      }
-    );
-
-    this.notObjSub=this.shareData.notObj$.subscribe(
-      notificacionObj => {
-        console.log('>>>>> ',notificacionObj);
-        this.notObj=notificacionObj;
-        
-      }
-    );
-      this.loadMap();
-      
+    this.loadMap();
 
   } 
 
@@ -87,21 +75,20 @@ export class DetallePage implements OnInit,OnDestroy {
     });
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setPanel(indicatorsEle);
-
-  
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      this.origin=this.shareData.notificacion.data.inicio;
+      this.destination=this.shareData.notificacion.data.fin;
       mapEle.classList.add('show-map');
-      this.calculateRoute();
-    });
-    
+      this.calculateRoute(this.origin,this.destination);
+    });    
   }
 
     //Realiza el calculo de la mejor ruta, utiliza los valores de origen y destino| se le debe pasar el modo
     //de viaje que se realiza en este caso DRIVING
-  private calculateRoute(){
+  private calculateRoute(ini:any,fin:any){  
     this.directionsService.route({
-      origin: this.origin,
-      destination: this.destination,
+      origin: JSON.parse(ini) ,
+      destination: JSON.parse(fin),
       travelMode: google.maps.TravelMode.DRIVING,
     }, (response, status)  => {
       if (status === google.maps.DirectionsStatus.OK) {
@@ -126,31 +113,7 @@ export class DetallePage implements OnInit,OnDestroy {
       );
   }
 
-  getTask() {
-    this.detalleServicio.getTask('1')
-    .subscribe(detalle => {
-      console.log(detalle);
-      (<HTMLInputElement>document.getElementById('name')).value=detalle.name;
-      (<HTMLInputElement>document.getElementById('hora')).value=detalle.id;
-      (<HTMLInputElement>document.getElementById('precio')).value=detalle.phone;
-    });
-  }
 
-  updateTask() {
-    const task = {
-      id:'1',
-      name:'lala',
-      hora:'po',
-      precio:'na',
-      email:'lalala@gmail.com',
-      phone:'1234',
-      username:"transportista"
-    };
-    this.detalleServicio.updateTask(task)
-    .subscribe(todo => {
-      console.log(todo);
-    });
-  }
 
   private async getLocation() {
     const myPosition = await this.geolocation.getCurrentPosition();
