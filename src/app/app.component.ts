@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from "./services/auth.service";
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -15,6 +15,8 @@ import {
 
 const { PushNotifications } = Plugins;
 
+import { Router } from '@angular/router';
+
 //Alertas de manera local
 import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
@@ -28,11 +30,13 @@ import { ShareDataService } from './services/share-data.service';
 export class AppComponent implements OnInit {
 
   constructor(
+    private AFauth: AuthService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
-    private shareData: ShareDataService
+    private shareData: ShareDataService,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -122,8 +126,30 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
+        
+        if (notification.notification.data) {
+          this.router.navigateByUrl('/detalles');
+          let origin=JSON.parse(notification.notification.data.inicio);
+        console.log('Inicio> ',typeof(origin))//object
+        console.log('Inicio> ',typeof(origin.lat))
+        let destiny=JSON.parse(notification.notification.data.fin);
+        console.log('Fin> ',typeof(destiny.lng))
+
+        let notObjeto = {
+          'title':notification.notification.title,
+          'inicio':origin,
+          'fin':destiny,
+          'hora':notification.notification.data.hora,
+          'metodoPago':notification.notification.data.metodoPago,
+          'valor':notification.notification.data.valor,
+        }
+
+       
         this.shareData.notificacion=notification
         this.presentAlertConfirm(notification)
+        }
+        
+        
       }
     );
   }
@@ -160,8 +186,8 @@ export class AppComponent implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `${title}`,
-      message: `<div>
+      header: `<div id="header-card">${title}</div>`,
+      message: `<div id="body-content">
         <p><strong>Pto. de Partida: </strong>${inicio}</p>
         <p><strong>Pto. de LLegada: </strong>${fin}</p>
         <p><strong>Hora: </strong>${hora}</p>
@@ -170,15 +196,16 @@ export class AppComponent implements OnInit {
       </div>`,
       buttons: [
         {
-          text: 'Omitir',
+          text: 'NO',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'btn-no',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
 
           }
         }, {
-          text: 'Aceptar',
+          text: 'SI',
+          cssClass: 'btn-si',
           handler: () => {
             console.log('Confirm Okay');
           }
@@ -188,4 +215,9 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
+
+  on_logout(){
+    this.AFauth.logout();
+  }
+
 }

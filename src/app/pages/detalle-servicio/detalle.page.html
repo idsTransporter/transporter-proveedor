@@ -1,36 +1,41 @@
+<app-header-back title="Solicitud de servicio"></app-header-back>
 
-<ion-header [translucent]="true">
-  <ion-toolbar >
-    <div class="toolbar-content">
-      <ion-button fill="clear" slot="start">
-        <ion-menu-button slot="start"></ion-menu-button>
-      </ion-button>
+<ion-content >
+  <div id="map"></div>
 
-      <ion-title>
-        DETALLE
-      </ion-title>
-   
-    </div>
-  </ion-toolbar>
-</ion-header>
+ <!--<div className="collapse navbar-collapse" id="detallesRuta">
+   <h5>INFORMACION DEL SERVICIO</h5>
+   <button (click)="getTask()">getTask()</button>
+  </div>
+  <ul>
+    <li>Nombre : <input id="name" disabled></li>
+    <li>Hora : <input id="hora" disabled></li>
+    <li>Precio : <input id="precio" disabled></li>
+  </ul>
+  <button (click)="updateTask()">Aceptar servicio</button>
 
-<ion-content [fullscreen]="true">
- <div id="map"></div>
-
- <ion-card  id="detallesRuta">
-    <ion-card-header class="header-card">
-      <ion-card-title>INFORMACIÓN DEL SERVICIO</ion-card-title>
-    </ion-card-header>
-  
+  <ion-card id="detallesRuta">
+    <ion-card-header >
+      <div class="header-card">
+      INFORMACIÓN DEL SERVICIO
+      </div>
+    </ion-card-header >   
     <ion-card-content>
-      <ul>
-        <li>Inicio : {{shareData.notificacion.data.inicio}}</li>
-        <li>Fin : {{shareData.notificacion.data.fin}}</li>
-        <li>Metodo de pago : {{shareData.notificacion.data.metodoPago}}</li>
-        <li>Hora : {{shareData.notificacion.data.hora}}</li>
-        <li>Precio : {{shareData.notificacion.data.valor}}</li>
-      </ul>
-      <ion-button (click)="updateTask()" class="accept-button">Aceptar servicio</ion-button>
+      <div id="body-content">
+        <p><strong>Pto. de Partida: </strong>inicio</p>
+        <p><strong>Pto. de LLegada: </strong>fin</p>
+        <p><strong>Hora: </strong>hora</p>
+        <p><strong>Fecha: </strong>fecha</p>
+        <p><strong>Valor: </strong>valor</p>
+        <p><strong>Metodo de Pago: </strong>metodoPago</p>
+        
+      </div>
+      <ion-button class="btn-no">NO</ion-button>
+      <ion-button (click)="updateTask()" class="secondary">SI</ion-button>
+      
     </ion-card-content>
   </ion-card>
+
+  <button (click)="getTask()">getTask()</button>-->
 </ion-content>
+

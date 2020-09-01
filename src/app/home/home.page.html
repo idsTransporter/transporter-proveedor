@@ -1,5 +1,5 @@
 
-<ion-content class="content">
+<!--<ion-content class="content">
   <div class="avatar-background">   
     <ion-avatar class="avatar-content">  
     <img src="assets/imgs/user.png"> 
@@ -50,6 +50,27 @@
     <ion-card-content>{{not.cuerpo }}</ion-card-content>
     </ion-card>
   </ion-virtual-scroll>
-</ion-content> 
+</ion-content> -->
+
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="mensaje">
+      <ion-img src="assets/icon/mensajer_inactivos.png.png"> 
+      <ion-label>Mis mensajes</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notificacion">
+      <ion-img src="assets/icon/notificaciones_inactivas.png"> 
+      <ion-label>Notificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="chat">
+      <ion-img src="assets/icon/chat_inactivo.png"> 
+      <ion-label>Chat</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
 
  

@@ -4,23 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetallePageRoutingModule } from './detalle-routing.module';
+import { MessagePageRoutingModule } from './message-routing.module';
+
+import { MessagePage } from './message.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { DetallePage } from './detalle.page';
-
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetallePageRoutingModule,
+    MessagePageRoutingModule,
     ComponentsModule
   ],
-  declarations: [DetallePage]
+  declarations: [MessagePage]
 })
-export class DetallePageModule {}
-
-
-
+export class MessagePageModule {}

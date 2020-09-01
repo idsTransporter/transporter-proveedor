@@ -53,7 +53,9 @@ export class DetallePage implements OnInit,OnDestroy {
     
 }
   ngOnInit(){
+
     this.loadMap();
+
   } 
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
@@ -111,31 +113,7 @@ export class DetallePage implements OnInit,OnDestroy {
       );
   }
 
-  getTask() {
-    this.detalleServicio.getTask('1')
-    .subscribe(detalle => {
-      console.log(detalle);
-      (<HTMLInputElement>document.getElementById('name')).value=detalle.name;
-      (<HTMLInputElement>document.getElementById('hora')).value=detalle.id;
-      (<HTMLInputElement>document.getElementById('precio')).value=detalle.phone;
-    });
-  }
 
-  updateTask() {
-    const task = {
-      id:'1',
-      name:'lala',
-      hora:'po',
-      precio:'na',
-      email:'lalala@gmail.com',
-      phone:'1234',
-      username:"transportista"
-    };
-    this.detalleServicio.updateTask(task)
-    .subscribe(todo => {
-      console.log(todo);
-    });
-  }
 
   private async getLocation() {
     const myPosition = await this.geolocation.getCurrentPosition();

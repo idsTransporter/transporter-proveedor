@@ -1,16 +1,40 @@
-.menu-header-bg{
-    height: 150px;
-    width: 350px;    
-    background: radial-gradient(#312a8a ,#0e0e2b)
- 
-
+* {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+}  
+.menu-bg{
+    height: 100%;    
+    background: linear-gradient(#20478c ,#2485c9)
 }
+
 .menu-header-content{
-    position: absolute;
+    padding-top: 15%;
+    padding-left:5%;
+    padding-bottom:10% ;
     top: 30px;
-    left: 15px;
+    left: 20px;
     display: flex;
+    color: rgb(255, 255, 255);;
     align-items: center;
+    
+
+    ion-avatar{
+        width: 70px;
+        height: 70px;
+        margin-right: 15px;
+        
+        
+    }
+    h2{
+        font-weight: 3000;  
+             
+    }
+    p{
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        font-weight: 100;
+    }
+
 
 }
 
@@ -18,12 +42,35 @@
     margin:0px;
     ion-icon{
         margin-right: 20px;
-        color: gray;
+        color: rgb(255, 255, 255);
     }
+    
 
     ion-item{
-        padding-left: 20px;
+        padding-left: 15px;
+        padding-top: 5%;
+        
         margin-bottom: 10px;
+        
     }
+} 
 
+.out-content{
+    bottom: 0;      
+    width: 100%; 
+    position: fixed;
+    padding-bottom: 5%;
+    
 }
+
+.text{
+    display: flex;
+    padding-top: 5%;
+    justify-content: center;
+}
+
+hr {
+    height: 1px;
+    width: 80%;
+    background-color: white;
+  }
