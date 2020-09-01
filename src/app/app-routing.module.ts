@@ -23,13 +23,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate:[NotloginGuard],
   },
-  /*{
+  {
     path: 'map',
     loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
-  },*/
+  },
   {
     path:'detalle',
-    loadChildren:()=> import('./pages/detalle-servicio/detalle-routing.module').then(m => m.DetallePageRoutingModule)
+    loadChildren:()=> import('./pages/detalle-servicio/detalle.module').then(m => m.DetallePageModule)
   },
   {
     path: 'reset-password',

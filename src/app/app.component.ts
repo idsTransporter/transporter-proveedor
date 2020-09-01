@@ -103,7 +103,7 @@ export class AppComponent implements OnInit {
         //alert('Push action performed: ' + JSON.stringify(notification));
         
         if (notification.notification.data) {
-          this.router.navigate(['/home'])
+          this.router.navigate(['/tabs'])
           let origin=JSON.parse(notification.notification.data.inicio);
           console.log('Inicio> ',typeof(origin))//object
           console.log('Inicio> ',typeof(origin.lat))
@@ -192,6 +192,47 @@ export class AppComponent implements OnInit {
 
   on_logout(){
     this.AFauth.logout();
+  }
+
+  async presentAlertInicio() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Inicio del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
+     <p>Ha llegado a la ubicación del cliente</p>
+    </div>`,
+      buttons: [{
+        text: 'Iniciar Servicio',
+        cssClass: 'btn-si',
+        handler: () => {
+          console.log('Confirm Okay');
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertFin() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Fin del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
+     <p>Ha llegado a la ubicación del cliente</p>
+    </div>`,
+      buttons: [{
+        text: 'Finalizar Servicio',
+        cssClass: 'btn-si',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.router.navigate(['/tabs'])
+        }
+      }]
+    });
+
+    await alert.present();
   }
 
 }
