@@ -5,7 +5,6 @@ import { LoadingController } from '@ionic/angular';
 declare var google;
 
 //Servicio para compartir data
-import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-map',

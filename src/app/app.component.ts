@@ -59,12 +59,12 @@ export class AppComponent implements OnInit {
       }
     });
 
-    PushNotifications.addListener('registration',
+   /* PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
         //alert('Push registration success, token: ' + token.value);
         this.presentAlert(token.value)
       }
-    );
+    );*/
 
     PushNotifications.addListener('registrationError',
       (error: any) => {
@@ -196,10 +196,12 @@ export class AppComponent implements OnInit {
 
   async presentAlertInicio() {
     const alert = await this.alertController.create({
+
       cssClass: 'notification-class',
       header: `Inicio del servicio`,
       message: `<div>
      <img class="center" src="assets/icon/proceso_exitoso.png">
+
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
@@ -216,10 +218,12 @@ export class AppComponent implements OnInit {
 
   async presentAlertFin() {
     const alert = await this.alertController.create({
+
       cssClass: 'notification-class',
       header: `Fin del servicio`,
       message: `<div>
      <img class="center" src="assets/icon/proceso_exitoso.png">
+
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
