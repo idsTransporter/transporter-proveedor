@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
   async presentToastFeedback() {
     const toast = await this.toastController.create({
       message: 'Usuario/cotrasenia incorrectos',
+      position: 'top',
       duration: 2000
     });
     toast.present();

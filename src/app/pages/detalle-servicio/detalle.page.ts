@@ -7,6 +7,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Subscription } from 'rxjs';
 
+import { AlertController } from '@ionic/angular';
+
+import { Router } from '@angular/router';
+
 declare var google;
 
 @Component({
@@ -39,7 +43,9 @@ export class DetallePage implements OnInit,OnDestroy {
     private launchNavigator: LaunchNavigator,
     private detalleServicio:DetalleServicioService,
     private geolocation: Geolocation,
-    public shareData: ShareDataService
+    public alertController: AlertController,
+    public shareData: ShareDataService,
+    private router: Router
     ) {
   }
   ngOnDestroy(){
@@ -125,4 +131,46 @@ export class DetallePage implements OnInit,OnDestroy {
     };
   }
 
+  async presentAlertInicio() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Inicio del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
+     <p>Ha llegado a la ubicación del cliente</p>
+    </div>`,
+      buttons: [{
+        text: 'Iniciar Servicio',
+        cssClass: 'btn-si',
+        handler: () => {
+          console.log('Confirm Okay');
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertFin() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Fin del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
+     <p>Ha llegado a la ubicación del cliente</p>
+    </div>`,
+      buttons: [{
+        text: 'Finalizar Servicio',
+        cssClass: 'btn-si',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.router.navigate(['/tabs'])
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
 }
+

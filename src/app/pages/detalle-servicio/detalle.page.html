@@ -1,4 +1,24 @@
-<app-header-back title="Solicitud de servicio"></app-header-back>
+  
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+      <ion-title class="ion-text-center" text-capitalize>
+        Servicio en curso
+      </ion-title>
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content >
   <div id="map"></div>
