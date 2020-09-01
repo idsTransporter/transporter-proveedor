@@ -196,15 +196,17 @@ export class AppComponent implements OnInit {
 
   async presentAlertInicio() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+
+      cssClass: 'notification-class',
       header: `Inicio del servicio`,
-      message: `<div id="body-content">
-     <img class="center" src="assets/icon/pointer_rojo.png">
+      message: `<div>
+     <img class="center" src="assets/icon/proceso_exitoso.png">
+
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
         text: 'Iniciar Servicio',
-        cssClass: 'btn-si',
+        cssClass: 'btn',
         handler: () => {
           console.log('Confirm Okay');
         }
@@ -216,15 +218,17 @@ export class AppComponent implements OnInit {
 
   async presentAlertFin() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+
+      cssClass: 'notification-class',
       header: `Fin del servicio`,
-      message: `<div id="body-content">
-     <img class="center" src="assets/icon/pointer_rojo.png">
+      message: `<div>
+     <img class="center" src="assets/icon/proceso_exitoso.png">
+
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
         text: 'Finalizar Servicio',
-        cssClass: 'btn-si',
+        cssClass: 'btn',
         handler: () => {
           console.log('Confirm Okay');
           this.router.navigate(['/tabs'])
