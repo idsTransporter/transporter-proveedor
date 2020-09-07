@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1016512674468:android:484420b2ca635edfc14431",
         "android_client_info": {
-          "package_name": "io.ionic.starter"
+          "package_name": "com.trasnporter.app"
         }
       },
       "oauth_client": [
