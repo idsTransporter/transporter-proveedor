@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
 import { ShareDataService } from './services/share-data.service';
+import {DetalleServicioService} from './services/detalle-servicio.service';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     public alertController: AlertController,
     private shareData: ShareDataService,
+    private detalleServicio:DetalleServicioService,
     private router: Router
   ) {
     this.initializeApp();
@@ -93,8 +95,9 @@ export class AppComponent implements OnInit {
 
         this.shareData.notObj$.emit(notObjeto);
 
-        this.shareData.notificacion = notification
-        this.presentAlertConfirm(notification)
+        this.shareData.notificacion = notification;
+        this.shareData.detalleServicio=notification;
+        this.presentAlertConfirm(notification);
       }
     );
 
@@ -120,8 +123,9 @@ export class AppComponent implements OnInit {
         }
 
        
-        this.shareData.notificacion=notification
-        this.presentAlertConfirm(notification)
+        this.shareData.notificacion=notification;
+        this.shareData.detalleServicio=notification;
+        this.presentAlertConfirm(notification);
         }
       }
     );
@@ -148,15 +152,16 @@ export class AppComponent implements OnInit {
   }
 
   async presentAlertConfirm(notification) {
-
-
-    let title=notification.title
-    let inicio=notification.data.inicio
-    let fin=notification.data.fin
-    let hora=notification.data.hora
-    let metodoPago=notification.data.metodoPago
-    let valor=notification.data.valor
-
+    let title=notification.title;
+    let inicio=notification.data.inicio;
+    let fin=notification.data.fin;
+    let hora=notification.data.hora;
+    let metodoPago=notification.data.metodoPago;
+    let valor=notification.data.valor;
+    //let strInicio=this.detalleServicio.reverseGeocoding(notification.data.inicio);
+    //let strFin=this.detalleServicio.reverseGeocoding(notification.data.fin);
+    //console.log("inicioAPP"+strInicio);
+    //console.log("finAPP"+strFin);
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: `${title}`,
@@ -209,6 +214,7 @@ export class AppComponent implements OnInit {
         cssClass: 'btn',
         handler: () => {
           console.log('Confirm Okay');
+         this.router.navigate(['/detalle']);
         }
       }]
     });

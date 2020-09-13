@@ -9,6 +9,8 @@ export class ShareDataService {
   //notificacion:{}=null;
   notificacion: any={};
 
+  //datos presentar detalleMapa
+  detalleServicio: Object={};
   //Es un Observable
   nombreNot$=new EventEmitter<string>();
 
