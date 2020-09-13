@@ -25,14 +25,14 @@
   <div>
     <h5>INFORMACIÓN DEL SERVICIO</h5>    
    <ul>
-     <li>Fecha: {{shareData.detalleServicio.data.hora}}</li>
+     <li>Fecha:{{shareData.detalleServicio.data.hora}} </li>
      <li>Método de pago: {{shareData.detalleServicio.data.metodoPago}}</li>
      <li>Valor: {{shareData.detalleServicio.data.valor}}</li>
    </ul>
   </div>
   <div class="row"> 
-    <ion-button id="confirmar" (click)="confirmarServicio()" >INICIAR</ion-button>
-    <ion-button id="finalizar" (click)="finalizarServicio()" disabled>FINALIZAR</ion-button> 
+    <ion-button  id="confirmar" size="default" (click)="confirmarServicio()" >INICIAR</ion-button>
+    <ion-button  id="finalizar" size="default" (click)="finalizarServicio()" disabled>FINALIZAR</ion-button> 
   </div>
 </ion-content>
 

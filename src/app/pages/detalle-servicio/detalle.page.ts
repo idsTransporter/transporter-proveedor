@@ -22,7 +22,7 @@ declare var google;
 export class DetallePage implements OnInit,OnDestroy {
   mapa=null;
   marker=null;
-  watch=null;
+  watch:any;
 
   
   directionsService = new google.maps.DirectionsService();
@@ -48,15 +48,24 @@ export class DetallePage implements OnInit,OnDestroy {
   }
   ngOnDestroy(){
     console.log("*** DESTROY DETALLESS")
-    this.nombreNotSubs.unsubscribe();
-    this.notObjSub.unsubscribe();
-    this.mapa=null;
-    this.watch=null;
+    //this.nombreNotSubs.unsubscribe();
+    //this.notObjSub.unsubscribe();
+   //this.mapa=null;
+    //this.watch=null;
   }
+  /*ionViewWillLeave(){
+    this.watchPosition();
+  }*/
 
-  ngOnInit(){
+  ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
+  }
+
+
+  ngOnInit(){
+  //  this.loadMap();
+    //this.watchPosition();
   } 
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
@@ -161,7 +170,7 @@ export class DetallePage implements OnInit,OnDestroy {
           text: 'Aceptar',
           handler: () => {
             console.log('CARRERA FINALIZADA');
-            navigator.geolocation.clearWatch(this.watch);
+            this.stopWatch();
             this.router.navigate(['/map']);
           }
         }, {
@@ -174,5 +183,8 @@ export class DetallePage implements OnInit,OnDestroy {
     await alert.present();
   }
 
-}
+  private stopWatch(){
+    this.watch=null;
+  }
 
+}

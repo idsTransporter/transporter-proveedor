@@ -27,9 +27,13 @@ export class MapPage implements OnInit,OnDestroy {
   ngOnDestroy(){
     this.map=null;
   }
+  
+  ionViewWillEnter(){
+   this.loadMap();
+  }
   ngOnInit() {
     //this.watchPosition();
-    this.loadMap();
+    //this.loadMap();
   }
 
   //Cargar el mapa, llama a la funcion getLocation para obtener longitud y latitud del usuario y los pasa 
