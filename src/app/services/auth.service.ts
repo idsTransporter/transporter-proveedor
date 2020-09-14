@@ -5,6 +5,9 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 
+import { ToastController } from '@ionic/angular';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +15,8 @@ export class AuthService {
 
   constructor(
     private AFauth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    public toastController: ToastController
   ) { }
 
   /**
@@ -67,18 +71,31 @@ export class AuthService {
    */
   reset_password(correo_recuperacion: string) {
     if (isNullOrUndefined(correo_recuperacion) || correo_recuperacion == "") {
-      alert("Debe ingresar un correo electronico.")
+      this.presentToastFeedback('Debe ingresar un correo electronico.')
+      //alert("Debe ingresar un correo electronico.")
     } else {
       this.AFauth.sendPasswordResetEmail(correo_recuperacion)
         .then(
           (res) => {
             console.log("Exito!!! se envio")
+            this.presentToastFeedback('Exito!!! se envio al correo de recuperacion');
+            this.router.navigate(['/login'])
           }
         ).catch(
           (err) => {
+            this.presentToastFeedback("ERROR> Linea 66 auth.service " + err);
             console.error("ERROR> Linea 66 auth.service " + err)
           }
         )
     }
+  }
+
+  async presentToastFeedback(text: string) {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000,
+      position: 'top',
+    });
+    toast.present();
   }
 }

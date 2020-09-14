@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 //Servicio para la authentication con firebase y el ruteo entre apaginas
 import {AuthService} from '../../services/auth.service'
@@ -6,6 +6,10 @@ import {Router} from '@angular/router'
 
 //Importar el Ctrl de Toast (Feedback)
 import { ToastController } from '@ionic/angular';
+
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -15,6 +19,10 @@ import { ToastController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   correo_electronico: string
   contrasenia: string
+
+  @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
+  // Seleccionamos el elemento co   n el nombre que le pusimos con el #
+  passwordTypeInput  =  'password';   
 
   constructor(
     private auth_service: AuthService, 
@@ -70,4 +78,21 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+
+  // Esta función verifica si el tipo de campo es texto lo cambia a password y viceversa, además verificara el icono si es 'eye-off' lo cambiara a 'eye' y viceversa
+togglePasswordMode() {
+  //cambiar tipo input
+this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
+ //obtener el input
+ const nativeEl = this.passwordEye.nativeElement.querySelector('input');
+ //obtener el indice de la posición del texto actual en el input
+ const inputSelection = nativeEl.selectionStart;
+ //ejecuto el focus al input
+ nativeEl.focus();
+//espero un milisegundo y actualizo la posición del indice del texto
+ setTimeout(() => {
+     nativeEl.setSelectionRange(inputSelection, inputSelection);
+ }, 1);
+
+}
 }

@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     /*
     * Solicitar permiso para usar notificaciones push
     * iOS solicitará al usuario y regresará si les concedió permiso o no
-    * Android sólo concederá sin preguntar
+    *m Android sólo concederá sin preguntar
     */
     PushNotifications.requestPermission().then( result => {
       if (result.granted) {
@@ -59,12 +59,12 @@ export class AppComponent implements OnInit {
       }
     });
 
-   /* PushNotifications.addListener('registration',
+    PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
         //alert('Push registration success, token: ' + token.value);
         this.presentAlert(token.value)
       }
-    );*/
+    );
 
     PushNotifications.addListener('registrationError',
       (error: any) => {
@@ -159,7 +159,7 @@ export class AppComponent implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `${title}`,
+      header: `<h1 id="header-card">${title}</h1>`,
       message: `<div id="body-content">
         <p><strong>Pto. de Partida: </strong>${inicio}</p>
         <p><strong>Pto. de LLegada: </strong>${fin}</p>
@@ -196,17 +196,15 @@ export class AppComponent implements OnInit {
 
   async presentAlertInicio() {
     const alert = await this.alertController.create({
-
-      cssClass: 'notification-class',
-      header: `Inicio del servicio`,
-      message: `<div>
-     <img class="center" src="assets/icon/proceso_exitoso.png">
-
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Inicio del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
         text: 'Iniciar Servicio',
-        cssClass: 'btn',
+        cssClass: 'btn-si',
         handler: () => {
           console.log('Confirm Okay');
         }
@@ -218,17 +216,15 @@ export class AppComponent implements OnInit {
 
   async presentAlertFin() {
     const alert = await this.alertController.create({
-
-      cssClass: 'notification-class',
-      header: `Fin del servicio`,
-      message: `<div>
-     <img class="center" src="assets/icon/proceso_exitoso.png">
-
+      cssClass: 'my-custom-class',
+      header: `<h1 id="header-card">Fin del servicio</h1>`,
+      message: `<div id="body-content">
+     <img class="center" src="assets/icon/pointer_rojo.png">
      <p>Ha llegado a la ubicación del cliente</p>
     </div>`,
       buttons: [{
         text: 'Finalizar Servicio',
-        cssClass: 'btn',
+        cssClass: 'btn-si',
         handler: () => {
           console.log('Confirm Okay');
           this.router.navigate(['/tabs'])

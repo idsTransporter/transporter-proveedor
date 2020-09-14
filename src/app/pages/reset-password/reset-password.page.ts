@@ -24,7 +24,7 @@ export class ResetPasswordPage implements OnInit {
   send_reset_password(){
     console.log("Se enviara el correo...");
     this.auth_service.reset_password(this.correo_recuperacion);
-    this.router.navigate(['/login']);
+    //this.router.navigate(['/login']);
   }
 
 }
