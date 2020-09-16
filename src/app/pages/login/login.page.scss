@@ -9,7 +9,7 @@
 .boton{
     --background: #e6242f;  
     width: 100%;
-    height: 10%;
+    height: 8%;
     bottom: 0;
     position: fixed;
     }
@@ -17,21 +17,19 @@
 .content-items{
     width: 100%;
     position: fixed;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25%; 
+    ion-item{
+        --highlight-color-valid: #e6242f; 
+       
+    }     
     
 }
+
 .content-link{
     text-align: center;
     color: #e6242f;
     text-decoration: none;    
 }
 
-ion-item{
-    --ripple-color: #e6242f;
-    --highlight-color-valid: #e6242f;
-    --highlight-color-invalid: #e6242f;
-    --highlight-color-focused: #e6242f;
-
-    --color-hover:#e6242f;
-    --color-focused:#e6242f;
-    --color-activated:#e6242f;
-}
