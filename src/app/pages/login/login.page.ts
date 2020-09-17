@@ -20,9 +20,14 @@ export class LoginPage implements OnInit {
   correo_electronico: string
   contrasenia: string
 
+/*
   @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
   // Seleccionamos el elemento co   n el nombre que le pusimos con el #
-  passwordTypeInput  =  'password';   
+  passwordTypeInput  =  'password';   */
+
+
+  showPassword=false;
+  passwordIcon='eye';
 
   constructor(
     private auth_service: AuthService, 
@@ -80,7 +85,7 @@ export class LoginPage implements OnInit {
   }
 
   // Esta función verifica si el tipo de campo es texto lo cambia a password y viceversa, además verificara el icono si es 'eye-off' lo cambiara a 'eye' y viceversa
-togglePasswordMode() {
+/*togglePasswordMode() {
   //cambiar tipo input
 this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
  //obtener el input
@@ -94,5 +99,16 @@ this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text'
      nativeEl.setSelectionRange(inputSelection, inputSelection);
  }, 1);
 
-}
+}*/
+
+  iconPassword(){
+    this.showPassword=!this.showPassword;
+    if(this.passwordIcon=='eye'){
+      this.passwordIcon='eye-off';
+    }
+    else{
+      this.passwordIcon='eye';
+    }
+  }
+
 }

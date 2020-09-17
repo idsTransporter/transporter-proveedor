@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1016512674468",
-    "firebase_url": "https://transporter-careapp.firebaseio.com",
-    "project_id": "transporter-careapp",
-    "storage_bucket": "transporter-careapp.appspot.com"
+    "project_number": "627980958884",
+    "firebase_url": "https://vehicular-287023.firebaseio.com",
+    "project_id": "vehicular-287023",
+    "storage_bucket": "vehicular-287023.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1016512674468:android:484420b2ca635edfc14431",
+        "mobilesdk_app_id": "1:627980958884:android:65929224c84ac60c98fa31",
         "android_client_info": {
           "package_name": "com.trasnporter.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1016512674468-lnugqma1pf98eac64n569e6degbidul5.apps.googleusercontent.com",
+          "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBS4kXl5bEi3THOI_xYaTBbH4Ndf7b_4lM"
+          "current_key": "AIzaSyChxT5uv0rNNprmC_hZhbG7CChL_5TB0NI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1016512674468-lnugqma1pf98eac64n569e6degbidul5.apps.googleusercontent.com",
+              "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
