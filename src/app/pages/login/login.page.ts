@@ -15,7 +15,8 @@ import { ToastController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   correo_electronico: string
   contrasenia: string
-
+  showPassword=false;
+  passwordIcon='eye';
   constructor(
     private auth_service: AuthService, 
     public router:Router,
@@ -69,5 +70,15 @@ export class LoginPage implements OnInit {
       ]
     });
     toast.present();
+  }
+
+  iconPassword(){
+    this.showPassword=!this.showPassword;
+    if(this.passwordIcon=='eye'){
+      this.passwordIcon='eye-off';
+    }
+    else{
+      this.passwordIcon='eye';
+    }
   }
 }
