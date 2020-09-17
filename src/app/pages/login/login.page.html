@@ -10,8 +10,9 @@
   </ion-item>
   
   <ion-item >
-    <ion-label >Contraseña</ion-label>
-    <ion-input #passwordEyeRegister [type]="passwordTypeInput" [(ngModel)]="contrasenia" name="contrasenia" ></ion-input>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input [type]="showPassword ? 'text':'password'" [(ngModel)]="contrasenia" name="contrasenia"></ion-input>
+    <ion-icon slot="end" [name]="passwordIcon" (click)="iconPassword()"></ion-icon>
   </ion-item>
 
   

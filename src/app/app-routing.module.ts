@@ -51,7 +51,12 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate: [AuthGuard],   
+  },
+  {
+    path: 'pago',
+    loadChildren: () => import('./pages/pago-servicio/pago-servicio.module').then( m => m.PagoServicioPageModule)
   }
+
 ];
 
 @NgModule({
