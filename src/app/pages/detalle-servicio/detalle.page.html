@@ -23,16 +23,16 @@
 <ion-content >
   <div id="mapa"></div>
   <div>
-    <h5>INFORMACIÓN DEL SERVICIO</h5>    
-   <ul>
-     <li>Fecha:{{shareData.detalleServicio.data.hora}} </li>
-     <li>Método de pago: {{shareData.detalleServicio.data.metodoPago}}</li>
-     <li>Valor: {{shareData.detalleServicio.data.valor}}</li>
+    <h5>DETALLE DEL SERVICIO</h5>    
+   <ul style="list-style-type:none">
+    <li>Fecha:{{shareData.detalleServicio.data.hora}} </li>
+    <li>Método de pago: {{shareData.detalleServicio.data.metodoPago}}</li>
+    <li>Valor: ${{shareData.detalleServicio.data.valor}}</li>
    </ul>
   </div>
-  <div class="row"> 
-    <ion-button  id="confirmar" size="default" (click)="confirmarServicio()" >INICIAR</ion-button>
-    <ion-button  id="finalizar" size="default" (click)="finalizarServicio()" disabled>FINALIZAR</ion-button> 
+  <div class="botones"> 
+    <ion-button  expand="full" id="confirmar" (click)="confirmarServicio()" >INICIAR</ion-button>
+    <ion-button  expand="full" id="finalizar" (click)="finalizarServicio()" disabled>FINALIZAR</ion-button> 
   </div>
 </ion-content>
 

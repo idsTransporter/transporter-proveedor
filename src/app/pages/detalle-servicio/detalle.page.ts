@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
-import { DetalleServicioService } from '../../services/detalle-servicio.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
 
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
+import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
 import { Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
@@ -44,14 +44,11 @@ export class DetallePage implements OnInit,OnDestroy {
     public alertController: AlertController,
     public shareData: ShareDataService,
     private router: Router,
+    private detalle:DetalleServicioService,
     ) {
   }
   ngOnDestroy(){
     console.log("*** DESTROY DETALLESS")
-    //this.nombreNotSubs.unsubscribe();
-    //this.notObjSub.unsubscribe();
-   //this.mapa=null;
-    //this.watch=null;
   }
   /*ionViewWillLeave(){
     this.watchPosition();
@@ -66,10 +63,12 @@ export class DetallePage implements OnInit,OnDestroy {
   ngOnInit(){
   //  this.loadMap();
     //this.watchPosition();
+    //window.location.reload()
   } 
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
   async loadMap() {
+
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('mapa');
     const indicatorsEle: HTMLElement = document.getElementById('indicators');
@@ -137,20 +136,50 @@ export class DetallePage implements OnInit,OnDestroy {
   } 
   async confirmarServicio() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Desea iniciar el servicio?',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            console.log('CONFIRM ACEPTAR');
-            this.bloquearInicio();
-          }
-        }, {
-          text: 'Cancelar',
-          role:'cancel'
+      cssClass: 'notification-class',
+      header: `Inicio del servicio`,
+      message: `<div>
+     <img class="center" src="assets/icon/proceso_exitoso.png">
+     <p>¿Desea iniciar el servicio?</p>
+    </div>`,
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => {
+          console.log('CONFIRM ACEPTAR');
+          this.bloquearInicio();
         }
-      ]
+      }, {
+        text: 'Cancelar',
+        role:'cancel'
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async finalizarServicio() {
+    const alert = await this.alertController.create({
+
+      cssClass: 'notification-class',
+      header: `Fin del servicio`,
+      message: `<div>
+     <img class="center" src="assets/icon/proceso_exitoso.png">
+
+     <p>¿Desea finalizar el servicio?</p>
+    </div>`,
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => {
+          console.log('CARRERA FINALIZADA');
+          this.stopWatch();
+          //this.detalle.geocodeLatLng();
+          this.bloquearFin();
+          this.router.navigateByUrl('/pago');
+        }
+      }, {
+        text: 'Cancelar',
+        role:'cancel'
+      }]
     });
 
     await alert.present();
@@ -161,30 +190,12 @@ export class DetallePage implements OnInit,OnDestroy {
     (<HTMLInputElement> document.getElementById("finalizar")).disabled = false;
   }
 
-  async finalizarServicio() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Desea finalizar el servicio?',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            console.log('CARRERA FINALIZADA');
-            this.stopWatch();
-            this.router.navigate(['/map']);
-          }
-        }, {
-          text: 'Cancelar',
-          role:'cancel'
-        }
-      ]
-    });
-
-    await alert.present();
+  private bloquearFin(){
+    (<HTMLInputElement> document.getElementById("confirmar")).disabled = false;
+    (<HTMLInputElement> document.getElementById("finalizar")).disabled = true;
   }
 
   private stopWatch(){
     this.watch=null;
   }
-
 }
