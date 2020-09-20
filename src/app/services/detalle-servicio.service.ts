@@ -5,6 +5,7 @@ import { google } from "google-maps";
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+
 declare var google:google;
 
 
@@ -14,6 +15,7 @@ declare var google:google;
 export class DetalleServicioService {
   private urlServidor = 'https://jsonplaceholder.typicode.com';
   geocoder= new google.maps.Geocoder();
+  direccion:String;
 
   constructor(
     private http:HttpClient,
@@ -34,21 +36,24 @@ export class DetalleServicioService {
   }
 
   geocodeLatLng(data:any){
-        let str = JSON.parse(data);
-        let coords=str[0];
-        const latlng={lat:coords.lat , lng:coords.lng};
-        console.log("data que recibe geocodeLat"+data);
-        console.log("data myString"+str);
-        console.log("data 0"+ coords);
-        console.log("constante latlng"+latlng);
-        this.geocoder.geocode(
-          {location:latlng},
-          (results:google.maps.GeocoderResult[],
-          status:google.maps.GeocoderStatus
+    return new Promise((resolve,rejects)=>{
+      let str = JSON.parse(data);
+      const latlng=str;
+      console.log("data que recibe geocodeLat"+data);
+      console.log("data myString"+str);
+      console.log("constante latlng"+latlng);
+      this.geocoder.geocode(
+        {location:latlng},
+        (results:google.maps.GeocoderResult[],
+        status:google.maps.GeocoderStatus
           )=>{
             if(status==="OK"){
               if(results[0]){
                 console.log(results[0].formatted_address);
+                console.log("esta vaina entro al ok"+results[0].formatted_address);
+                resolve(
+                  results[0].formatted_address
+                )
               }
               else{
                 console.log("No results found");
@@ -56,8 +61,10 @@ export class DetalleServicioService {
             }
             else{
               console.log("Geocoder failed due to: " + status);
+              rejects(status);
             }
           }
-        );
+      );
+    });
   }
 }
