@@ -49,7 +49,11 @@ export class LoginPage implements OnInit {
         this.contrasenia=""
       } 
     ).catch(
-      err => this.presentToastFeedback()
+      err =>{
+        //Verificar si es un Network Error
+        
+        this.presentToastFeedback()
+      } 
     );
   }
 
