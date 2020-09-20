@@ -1,18 +1,13 @@
-.tabs-bg{
-    --background:white;
-    
-    ion-label{
-        color:#87868A;
-        padding-top: 7px;
-        font-size: 1em;
-    }
-    ion-tab-button:focus{
-        background:#e6242f;    
-        color:white;
-    }
-
-    
-   
-
-   
+ion-tab-button{
+   --background-focused: white;
+    --color-selected:white;
+  
 }
+
+.tabs-bg{    
+  ion-tab-button:focus{        
+            background:#e6242f;            
+            color:white;    
+        }
+       
+   }
