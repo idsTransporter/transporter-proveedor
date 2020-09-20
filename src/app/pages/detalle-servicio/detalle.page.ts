@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
-
+import { PopoverController, } from '@ionic/angular';
+import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
@@ -45,6 +46,7 @@ export class DetallePage implements OnInit,OnDestroy {
     public shareData: ShareDataService,
     private router: Router,
     private detalle:DetalleServicioService,
+    public popoverController: PopoverController
     ) {
   }
   ngOnDestroy(){
@@ -198,4 +200,13 @@ export class DetallePage implements OnInit,OnDestroy {
   private stopWatch(){
     this.watch=null;
   }
+
+  /*async presentPopoverInicio() {
+    const popover = await this.popoverController.create({
+      component: PopoverInicioFinComponent,
+      cssClass: 'my-custom-class',
+      translucent: true
+    });
+    return await popover.present();
+  }*/
 }
