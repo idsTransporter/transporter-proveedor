@@ -5,13 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
 
-
+import { PopoverController} from '@ionic/angular';
+import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 //Para las push notifications
 import {
   Plugins,
   PushNotification,
   PushNotificationToken,
-  PushNotificationActionPerformed 
+  PushNotificationActionPerformed
+ 
 } from '@capacitor/core';
 
 const { PushNotifications } = Plugins;
@@ -41,6 +43,8 @@ export class AppComponent implements OnInit {
     private shareData: ShareDataService,
     private router: Router,
     private detalle:DetalleServicioService,
+    private popoverController: PopoverController,
+    //private navParams: NavParams,
 
   ) {
     this.initializeApp();
@@ -269,5 +273,46 @@ export class AppComponent implements OnInit {
         }
       }
     );
+  }
+
+ /* async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }*/
+
+
+  async presentPopoverInicio() {
+    const popover = await this.popoverController.create({
+      component: PopoverInicioFinComponent,
+      cssClass: 'notification-class',
+      componentProps:{
+         title:"INICIO DEL SERVICIO",
+         body:"Ha llegado a la ubicación del cliente",
+         btn:" Iniciar Servicio" 
+      },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  async presentPopoverFin() {
+    const popover = await this.popoverController.create({
+      component: PopoverInicioFinComponent,
+      cssClass: 'notification-class',
+      componentProps:{
+         title:"FIN DEL SERVICIO",
+         body:"Ha llegado al final de la ruta",
+         btn:" Finalizar Servicio" 
+      },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
   }
 }

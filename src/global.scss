@@ -102,19 +102,38 @@
 
 
   .notification-class{
+    --height:45vh;
+    --width:75vw;
+    #header-card{
+      
+      //display: flex;
+      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      color:white;
+      justify-content: center;
+      height: 50px;
+      ion-title{
+        font-size: 13px;
+        padding-top: 5%;
+      }
+      
+    }
+
     img{
       display: block;
       margin-left: auto;
       margin-right: auto;
-      margin-top:auto;
-      margin-bottom:auto;
-      width: 50px;
-      height: 50px;
+      margin-top:30px;
+      margin-bottom:10px;
+      width: 75px;
+      height: 75px;
+      
     }
 
     p{
       text-align: center;
       padding-top: 10px;
+      font-size: 12px;
+      padding-bottom: 10%;
     }
   }
 
@@ -134,7 +153,9 @@
   }
 
   .btn{
-    align-content: center;
+    
     color: #2487C9;  
+    
+    //padding-top: 10%;
   }
 
