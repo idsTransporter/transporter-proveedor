@@ -201,12 +201,34 @@ export class DetallePage implements OnInit,OnDestroy {
     this.watch=null;
   }
 
-  /*async presentPopoverInicio() {
+  async presentPopoverInicio() {
     const popover = await this.popoverController.create({
       component: PopoverInicioFinComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'notification-class',
+      componentProps:{
+         title:"INICIO DEL SERVICIO",
+         body:"Ha llegado a la ubicación del cliente",
+         btn:" Iniciar Servicio" 
+      },
+      mode:"md",
       translucent: true
     });
     return await popover.present();
-  }*/
+  }
+
+  async presentPopoverFin() {
+    const popover = await this.popoverController.create({
+      component: PopoverInicioFinComponent,
+      cssClass: 'notification-class',
+      componentProps:{
+         title:"FIN DEL SERVICIO",
+         body:"Ha llegado al final de la ruta",
+         btn:" Finalizar Servicio" 
+      },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
+  }
+
 }

@@ -1,15 +1,11 @@
 ion-tab-button{
-    
-    --background-focused: white;
+   --background-focused: white;
     --color-selected:white;
   
 }
 
 .tabs-bg{    
-    
-  
-
-    ion-tab-button:focus{        
+  ion-tab-button:focus{        
             background:#e6242f;            
             color:white;    
         }
