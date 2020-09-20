@@ -1,0 +1,20 @@
+<ion-header>
+  <h1 id="header-card">{{title}}</h1>
+</ion-header>
+
+<ion-content>
+  <div id="body-content">
+    <p><strong>Pto. de Partida: </strong>{{inicio}}</p>
+    <p><strong>Pto. de LLegada: </strong>{{fin}}</p>
+    <p><strong>Hora: </strong>{{hora}}</p>
+    <p><strong>Método de Pago: </strong>{{metodoPago}}</p>
+    <p><strong>Valor: </strong>{{valor}}</p>
+  </div>
+  <p>¿Desea aceptar el servicio?</p>
+<div id="buttons-content">
+  
+  <ion-button class="btn-si" (click)="iniciarServicio()">SI</ion-button>
+  <ion-button class="btn-no" (click)="finalizarServicio()">NO</ion-button>
+</div>
+
+</ion-content>

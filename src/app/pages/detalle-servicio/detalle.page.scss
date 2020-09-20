@@ -11,20 +11,49 @@ ion-content {
   }
 }
 
-h5{
+#header{
+ 
+    text-align: left;
+    background: linear-gradient(-90deg,#20478B ,#2487C9);    
+    color:white;
+    font-size: 12px;
+
+ /* h5{
   height: 100%;    
   background: linear-gradient(#20478c ,#2485c9);
   color:white;
+  }*/
+
 }
 
+
 #confirmar{
-  --background:#cf3c4f;
+  --background: #E5242F;
+  width: 100%;
 }
 
 #finalizar{
-  --background:#808289;
+  --background: #AEADB3;
+  width: 100%;
 }
 
 .detalles{
   font-weight: bold;
+}
+#botones{
+  display: grid;
+  width: 100%;
+  grid-template-rows:repeat(2,50%) ; 
+  justify-content: space-evenly;
+  align-content: center;
+}
+#content{
+  display: grid;
+  width: 100%;
+  font-size: 12px;
+  grid-template-columns:repeat(2,50%) ; 
+  grid-template-rows:repeat(3,33.33%) ;
+  justify-content: space-evenly;
+  align-content: center;
+
 }
