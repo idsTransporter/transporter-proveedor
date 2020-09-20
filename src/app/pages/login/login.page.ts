@@ -6,6 +6,8 @@ import {Router} from '@angular/router'
 
 //Importar el Ctrl de Toast (Feedback)
 import { ToastController } from '@ionic/angular';
+//Importar el Loading (Feedback)
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 
@@ -32,18 +34,23 @@ export class LoginPage implements OnInit {
   constructor(
     private auth_service: AuthService, 
     public router:Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private ionLoader: LoaderService,
   ) { }
 
   ngOnInit() {
   }
 
+
+
   on_submit_login(){
     console.log("Dio click al iniciar sesion");
     //Cachar la promise del service/auth
+    this.ionLoader.showLoader()
     this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
       res =>{
+        this.ionLoader.hideLoader()
         this.router.navigate(['/tabs'])
         this.correo_electronico=""
         this.contrasenia=""
@@ -51,7 +58,7 @@ export class LoginPage implements OnInit {
     ).catch(
       err =>{
         //Verificar si es un Network Error
-        
+
         this.presentToastFeedback()
       } 
     );
