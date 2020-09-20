@@ -18,11 +18,11 @@ import {AngularFireAuthModule} from '@angular/fire/auth'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { ComponentsModule } from './components/components.module';
-
+import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, PopoverInicioFinComponent],
+  entryComponents: [PopoverInicioFinComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

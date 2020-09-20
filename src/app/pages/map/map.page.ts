@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 declare var google;
 
 //Servicio para compartir data
@@ -20,7 +22,8 @@ export class MapPage implements OnInit,OnDestroy {
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public PopoverController:PopoverController
   ) {
 
   }

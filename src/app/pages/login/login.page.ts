@@ -43,7 +43,11 @@ export class LoginPage implements OnInit {
     //Cachar la promise del service/auth
     this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
-      res => this.router.navigate(['/tabs'])
+      res =>{
+        this.router.navigate(['/tabs'])
+        this.correo_electronico=""
+        this.contrasenia=""
+      } 
     ).catch(
       err => this.presentToastFeedback()
     );
