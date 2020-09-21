@@ -48,7 +48,7 @@ export class LoaderService {
     return await this.loadingController.create(
       {
         message: 'Por favor espere...',
-        backdropDismiss:true
+        //backdropDismiss:true
       }
     ).then(res => {
       res.present().then(() => {
@@ -71,7 +71,18 @@ export class LoaderService {
   async hideLoader() {
     if (this.isLoading) {
       this.isLoading = false;
-      return await this.loadingController.dismiss();
+      return await this.loadingController.getTop().then(
+        loaderObj => {
+          if (loaderObj) {
+            this.isLoading = false;
+            this.loadingController.dismiss().then((res) => {
+              console.log('Loading dismissed!', res);
+            }).catch((error) => {
+              console.error('error', error);
+            });;
+            }
+        }
+      );
     }
     return null;
     /*
