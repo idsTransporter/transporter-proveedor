@@ -6,7 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
 
 import { PopoverController} from '@ionic/angular';
-import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+import {PopoverDetalleComponent}from 'src/app/components/popover-detalle/popover-detalle.component';
+
 //Para las push notifications
 import {
   Plugins,
@@ -162,21 +163,25 @@ export class AppComponent implements OnInit {
 
  /* async presentAlertConfirm(notification) {
     let title=notification.title;
+    let inicio=notification.data.inicio;
+    let fin=notification.data.fin;
     let hora=notification.data.hora;
     let metodoPago=notification.data.metodoPago;
     let valor=notification.data.valor;
-    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
-    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
-    console.log("strINICIO APP COMPONENT"+strInicio);
-    console.log("strFIN APP COMPONENT"+strFin);
+    //let strInicio=this.detalleServicio.reverseGeocoding(notification.data.inicio);
+    //let strFin=this.detalleServicio.reverseGeocoding(notification.data.fin);
+    //console.log("inicioAPP"+strInicio);
+    //console.log("finAPP"+strFin);
+    //let strInicio=this.detalle.geocodeLatLng(notification.data.inicio);
+   // console.log("strInicio"+strInicio);
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: `${title}`,
+      header: `<h1 id="header-card">${title}</h1>`,
       message: `<div id="body-content">
-        <p><strong>Pto. de Partida: </strong>${strInicio}</p>
-        <p><strong>Pto. de LLegada: </strong>${strFin}</p>
+        <p><strong>Pto. de Partida: </strong>${inicio}</p>
+        <p><strong>Pto. de LLegada: </strong>${fin}</p>
         <p><strong>Hora: </strong>${hora}</p>
-        <p><strong>Método de Pago: </strong>${metodoPago}</p>
+        <p><strong>Metodo de Pago: </strong>${metodoPago}</p>
         <p><strong>Valor: </strong>$${valor}</p>
       </div>`,
       buttons: [
@@ -247,10 +252,6 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
-
-*/
-
-  
 /*
   geocodeLatLng(){
 //    geocoder:google.maps.Geocoder;
@@ -291,19 +292,19 @@ export class AppComponent implements OnInit {
   
   async presentPopoverDetalle(notification) {
     let title=notification.title;
-    let inicio=notification.data.inicio;
-    let fin=notification.data.fin;
+    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
+    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
     let hora=notification.data.hora;
     let metodoPago=notification.data.metodoPago;
     let valor=notification.data.valor;
 
     const popover = await this.popoverController.create({
-      component: PopoverInicioFinComponent,
+      component: PopoverDetalleComponent,
       cssClass: 'my-custom-class',
       componentProps:{
          title:title,
-         inicio:inicio,
-         fin:fin,
+         inicio:strInicio,
+         fin:strFin,
          hora:hora,
          metodoPago:metodoPago,
          valor: valor
@@ -313,5 +314,4 @@ export class AppComponent implements OnInit {
     });
     return await popover.present();
   }
-
 }

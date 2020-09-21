@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
 import { PopoverController, } from '@ionic/angular';
 import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+import {PopoverFinComponent}from 'src/app/components/popover-fin/popover-fin.component';
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
@@ -218,7 +219,7 @@ export class DetallePage implements OnInit,OnDestroy {
 
   async presentPopoverFin() {
     const popover = await this.popoverController.create({
-      component: PopoverInicioFinComponent,
+      component: PopoverFinComponent,
       cssClass: 'notification-class',
       componentProps:{
          title:"FIN DEL SERVICIO",

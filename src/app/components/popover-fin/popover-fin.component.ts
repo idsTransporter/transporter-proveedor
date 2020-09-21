@@ -1,12 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavParams,PopoverController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
+
 @Component({
-  selector: 'app-popover-inicio-fin',
-  templateUrl: './popover-inicio-fin.component.html',
-  styleUrls: ['./popover-inicio-fin.component.scss'],
+  selector: 'app-popover-fin',
+  templateUrl: './popover-fin.component.html',
+  styleUrls: ['./popover-fin.component.scss'],
 })
-export class PopoverInicioFinComponent implements OnInit {
+export class PopoverFinComponent implements OnInit {
   title;
   body;
   btn;
@@ -18,6 +19,7 @@ export class PopoverInicioFinComponent implements OnInit {
    }
 
   ngOnInit() {}
+
   private bloquearInicio(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = true;
     (<HTMLInputElement> document.getElementById("finalizar")).disabled = false;
@@ -48,5 +50,4 @@ export class PopoverInicioFinComponent implements OnInit {
           this.router.navigate(['/tabs']);
           
   }
-
 }

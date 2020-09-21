@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
+//import { sign } from 'crypto';
 
 @Component({
   selector: 'app-popover-detalle',
@@ -14,7 +15,7 @@ export class PopoverDetalleComponent implements OnInit {
   hora;
   metodo;
   valor;
-  watch:any;
+
 
   constructor(private router: Router,private navParams: NavParams,private popover:PopoverController) {
     this.title=this.navParams.get("title");
@@ -27,34 +28,16 @@ export class PopoverDetalleComponent implements OnInit {
 
   ngOnInit() {}
 
-  private bloquearInicio(){
-    (<HTMLInputElement> document.getElementById("confirmar")).disabled = true;
-    (<HTMLInputElement> document.getElementById("finalizar")).disabled = false;
-  }
 
-  private bloquearFin(){
-    (<HTMLInputElement> document.getElementById("confirmar")).disabled = false;
-    (<HTMLInputElement> document.getElementById("finalizar")).disabled = true;
-  }
+async btnSi(){
+  console.log('Confirm Okay');
+  await this.popover.dismiss();
+  this.router.navigate(['/detalle']);
+}
 
-  private stopWatch(){
-    this.watch=null;
-  }
-
-
-  iniciarServicio(){
-    console.log('CONFIRM ACEPTAR');
-    this.bloquearInicio();
-    this.popover.dismiss();
-        
-  }
-
-  finalizarServicio(){
-    console.log('CARRERA FINALIZADA');
-          this.stopWatch();
-          //this.detalle.geocodeLatLng();          
-          this.bloquearFin();
-          this.router.navigateByUrl('/pago');
-          this.popover.dismiss();
-  }
+async btnNo(){
+  console.log('Confirm cancel');
+  await this.popover.dismiss();
+}
+  
 }
