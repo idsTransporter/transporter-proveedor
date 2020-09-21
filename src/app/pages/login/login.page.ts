@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
   
   async presentToastFeedback() {
     const toast = await this.toastController.create({
-      message: 'Usuario/cotrasenia incorrectos',
+      message: 'Usuario/contraseña incorrectos',
       position: 'top',
       duration: 2000
     });
@@ -77,7 +77,7 @@ export class LoginPage implements OnInit {
 
   async presentToastFeedbackWithOptions(err) {
     const toast = await this.toastController.create({
-      header: 'Usuario/cotrasenia incorrectos',
+      header: 'Usuario/contraseña incorrectos',
       message: err,
       position: 'top',
       buttons: [
