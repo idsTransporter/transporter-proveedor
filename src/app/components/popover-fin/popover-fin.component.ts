@@ -20,10 +20,10 @@ export class PopoverFinComponent implements OnInit {
 
   ngOnInit() {}
 
-  private bloquearInicio(){
+  /*private bloquearInicio(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = true;
     (<HTMLInputElement> document.getElementById("finalizar")).disabled = false;
-  }
+  }*/
 
   private bloquearFin(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = false;
@@ -34,12 +34,12 @@ export class PopoverFinComponent implements OnInit {
     this.watch=null;
   }
 
-  async iniciarServicio(){
+ /* async iniciarServicio(){
     console.log('CONFIRM ACEPTAR');
     this.bloquearInicio();
     await this.popover.dismiss();
         
-  }
+  }*/
 
   async finalizarServicio(){
     console.log('CARRERA FINALIZADA');

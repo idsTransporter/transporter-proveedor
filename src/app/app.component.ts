@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
 
 import { PopoverController} from '@ionic/angular';
-import {PopoverDetalleComponent}from 'src/app/components/popover-detalle/popover-detalle.component';
+
 
 //Para las push notifications
 import {

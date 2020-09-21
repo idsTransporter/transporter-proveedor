@@ -23,10 +23,10 @@ export class PopoverInicioFinComponent implements OnInit {
     (<HTMLInputElement> document.getElementById("finalizar")).disabled = false;
   }
 
-  private bloquearFin(){
+ /* private bloquearFin(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = false;
     (<HTMLInputElement> document.getElementById("finalizar")).disabled = true;
-  }
+  }*/
 
   private stopWatch(){
     this.watch=null;
@@ -39,7 +39,7 @@ export class PopoverInicioFinComponent implements OnInit {
         
   }
 
-  async finalizarServicio(){
+  /*async finalizarServicio(){
     console.log('CARRERA FINALIZADA');
           this.stopWatch();
           //this.detalle.geocodeLatLng();          
@@ -47,6 +47,6 @@ export class PopoverInicioFinComponent implements OnInit {
           await this.popover.dismiss();
           this.router.navigate(['/tabs']);
           
-  }
+  }*/
 
 }
