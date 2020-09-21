@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
     );
 
     PushNotifications.addListener('pushNotificationReceived',
-      (notification: PushNotification) => {
+    async (notification:  PushNotification) => {
         let origin=JSON.parse(notification.data.inicio);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
@@ -107,6 +107,10 @@ export class AppComponent implements OnInit {
         this.shareData.notificacion = notification;
         this.shareData.detalleServicio=notification;
         //this.presentAlertConfirm(notification);
+        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.inicio);
+        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.fin);
+
+
         this.presentPopoverDetalle(notification);
       }
     );

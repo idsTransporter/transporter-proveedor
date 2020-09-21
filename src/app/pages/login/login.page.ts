@@ -72,6 +72,7 @@ export class LoginPage implements OnInit {
       duration: 2000
     });
     toast.present();
+    this.ionLoader.hideLoader();
   }
 
   async presentToastFeedbackWithOptions(err) {

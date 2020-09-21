@@ -11,12 +11,18 @@ export class ShareDataService {
 
   //datos presentar detalleMapa
   detalleServicio: Object={};
+  
+  //Direcciones en String
+  inicio:Object={};
+  fin: Object={};
+  
   //Es un Observable
   nombreNot$=new EventEmitter<string>();
-
+  
 
   //Es un observable
   notObj$=new EventEmitter<object>();
+
 
   constructor() { }
 }
