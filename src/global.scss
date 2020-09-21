@@ -99,8 +99,7 @@
       width: 100%;
       font-size: 12px;
       padding-left: 3px;
-      grid-template-columns:repeat(2,50%) ; 
-      grid-template-rows:repeat(3,33.33%) ;
+      grid-template-rows:repeat(5,20%) ;
       justify-content: center;
       align-content: center;
       p{
@@ -112,9 +111,9 @@
       display: grid;
       width: 100%;
       grid-template-columns:repeat(2,50%) ; 
-      text-align: center;
-      justify-content:center;
+      justify-items:center;
       align-items: center;
+
     }
     #preg{
       text-align: center;
