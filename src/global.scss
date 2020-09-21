@@ -99,12 +99,10 @@
       width: 100%;
       font-size: 12px;
       padding-left: 3px;
-      grid-template-rows:repeat(5,20%) ;
+      grid-template-rows:30px, 30px, repeat(3,24px) ;
       justify-content: center;
       align-content: center;
-      p{
-        padding-bottom: 2px;
-      }
+      
   
     }
     #buttons-content{
