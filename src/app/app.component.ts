@@ -25,6 +25,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
 import { ShareDataService } from './services/share-data.service';
+import { PopoverDetalleComponent } from './components/popover-detalle/popover-detalle.component';
 
 
 @Component({
@@ -111,31 +112,34 @@ export class AppComponent implements OnInit {
     );
 
     PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification: PushNotificationActionPerformed) => {
+      async (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
         
         if (notification.notification.data) {
-          this.router.navigate(['/tabs'])
-          let origin=JSON.parse(notification.notification.data.inicio);
-          console.log('Inicio> ',typeof(origin))//object
-          console.log('Inicio> ',typeof(origin.lat))
-          let destiny=JSON.parse(notification.notification.data.fin);
-          console.log('Fin> ',typeof(destiny.lng))
-
-        let notObjeto = {
-          'title':notification.notification.title,
-          'inicio':origin,
-          'fin':destiny,
-          'hora':notification.notification.data.hora,
-          'metodoPago':notification.notification.data.metodoPago,
-          'valor':notification.notification.data.valor,
-        }
-
-       
-        this.shareData.notificacion=notification;
-        this.shareData.detalleServicio=notification;
-        //this.presentAlertConfirm(notification);
-        this.presentPopoverDetalle(notification);
+          let isCompleteRouter = await this.router.navigate(['/tabs'])
+          if(isCompleteRouter){
+            let origin=JSON.parse(notification.notification.data.inicio);
+            console.log('Inicio> ',typeof(origin))//object
+            console.log('Inicio> ',typeof(origin.lat))
+            let destiny=JSON.parse(notification.notification.data.fin);
+            console.log('Fin> ',typeof(destiny.lng))
+  
+          let notObjeto = {
+            'title':notification.notification.title,
+            'inicio':origin,
+            'fin':destiny,
+            'hora':notification.notification.data.hora,
+            'metodoPago':notification.notification.data.metodoPago,
+            'valor':notification.notification.data.valor,
+          }
+  
+         
+          this.shareData.notificacion=notification;
+          this.shareData.detalleServicio=notification;
+          //this.presentAlertConfirm(notification);
+          this.presentPopoverDetalle(notification);
+          }
+          
         }
       }
     );
