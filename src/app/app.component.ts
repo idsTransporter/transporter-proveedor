@@ -70,12 +70,12 @@ export class AppComponent implements OnInit {
       }
     });
 
-    PushNotifications.addListener('registration',
+    /*PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
         //alert('Push registration success, token: ' + token.value);
         this.presentAlert(token.value)
       }
-    );
+    );*/
 
     PushNotifications.addListener('registrationError',
       (error: any) => {
@@ -136,7 +136,6 @@ export class AppComponent implements OnInit {
          
           this.shareData.notificacion=notification;
           this.shareData.detalleServicio=notification;
-          //this.presentAlertConfirm(notification);
           this.presentPopoverDetalle(notification);
           }
           
@@ -164,6 +163,37 @@ export class AppComponent implements OnInit {
 
     await alert.present();
   }
+
+  on_logout(){
+    this.AFauth.logout();
+  }
+ 
+  async presentPopoverDetalle(notification) {
+    let title=notification.title;
+    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
+    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
+    let hora=notification.data.hora;
+    let metodoPago=notification.data.metodoPago;
+    let valor=notification.data.valor;
+
+    const popover = await this.popoverController.create({
+      component: PopoverDetalleComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+         title:title,
+         inicio:strInicio,
+         fin:strFin,
+         hora:hora,
+         metodoPago:metodoPago,
+         valor: valor
+      },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
+  }
+}
+
 
  /* async presentAlertConfirm(notification) {
     let title=notification.title;
@@ -211,11 +241,8 @@ export class AppComponent implements OnInit {
     await alert.present();
   }*/
 
-  on_logout(){
-    this.AFauth.logout();
-  }
 
- /* async presentAlertInicio() {
+/* async presentAlertInicio() {
     const alert = await this.alertController.create({
       cssClass: 'notification-class',
       header: `Inicio del servicio`,
@@ -291,31 +318,3 @@ export class AppComponent implements OnInit {
     });
     return await popover.present();
   }*/
-
-
-  
-  async presentPopoverDetalle(notification) {
-    let title=notification.title;
-    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
-    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
-    let hora=notification.data.hora;
-    let metodoPago=notification.data.metodoPago;
-    let valor=notification.data.valor;
-
-    const popover = await this.popoverController.create({
-      component: PopoverDetalleComponent,
-      cssClass: 'my-custom-class',
-      componentProps:{
-         title:title,
-         inicio:strInicio,
-         fin:strFin,
-         hora:hora,
-         metodoPago:metodoPago,
-         valor: valor
-      },
-      mode:"md",
-      translucent: true
-    });
-    return await popover.present();
-  }
-}

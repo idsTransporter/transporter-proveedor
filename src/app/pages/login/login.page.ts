@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
   on_submit_login(){
     console.log("Dio click al iniciar sesion");
     //Cachar la promise del service/auth
-    this.ionLoader.showLoader()
+    this.ionLoader.showLoader();
     this.auth_service.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva
       res =>{
@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
     ).catch(
       err =>{
         //Verificar si es un Network Error
-
+        this.ionLoader.hideLoader()
         this.presentToastFeedback()
       } 
     );
