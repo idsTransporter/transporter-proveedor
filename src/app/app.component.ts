@@ -188,8 +188,8 @@ export class AppComponent implements OnInit {
          inicio:strInicio,
          fin:strFin,
          hora:hora,
-         metodoPago:'$'+metodoPago,
-         valor: valor
+         metodoPago:metodoPago,
+         valor:valor
       },
       mode:"md",
       translucent: true
