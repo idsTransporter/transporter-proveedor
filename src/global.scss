@@ -96,12 +96,14 @@
     }
     #body-content{
       display: grid;
-      width: 100%;
+      width: 95%;
+      height: 150;
       font-size: 12px;
       padding-left: 3px;
-      grid-template-rows:30px, 30px, repeat(3,24px) ;
+      grid-template-rows:25px, 25px, repeat(3,24px) ;
       justify-content: center;
       align-content: center;
+      
       
   
     }
