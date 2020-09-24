@@ -147,7 +147,7 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
+ 
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -235,6 +235,7 @@ export class AppComponent implements OnInit {
           text: 'SI',
           cssClass: 'btn-si',
           handler: () => {
+            this.router.navigate(['/detalle'])
             console.log('Confirm Okay');
             this.router.navigateByUrl('/detalle');
           }

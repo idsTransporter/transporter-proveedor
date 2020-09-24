@@ -55,10 +55,16 @@ const routes: Routes = [
   {
     path: 'pago',
     loadChildren: () => import('./pages/pago-servicio/pago-servicio.module').then( m => m.PagoServicioPageModule)
+  },
+  {
+    path: 'service-map',
+    loadChildren: () => import('./pages/service-map/service-map.module').then( m => m.ServiceMapPageModule)
   }
 
 
 ];
+
+  
 
 @NgModule({
   imports: [
