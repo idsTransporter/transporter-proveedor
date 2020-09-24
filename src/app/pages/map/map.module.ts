@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MapPageRoutingModule } from './map-routing.module';
 
 import { MapPage } from './map.page';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 
 @NgModule({
