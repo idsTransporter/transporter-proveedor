@@ -20,6 +20,9 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { ComponentsModule } from './components/components.module';
 import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 
+//Para usar llamadas nativas
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
 @NgModule({
   declarations: [AppComponent, PopoverInicioFinComponent],
   entryComponents: [PopoverInicioFinComponent],
@@ -36,6 +39,7 @@ import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/po
     StatusBar,
     SplashScreen,
     Geolocation,LaunchNavigator,
+    CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

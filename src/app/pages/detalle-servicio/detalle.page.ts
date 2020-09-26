@@ -12,6 +12,9 @@ import { Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
 
+//Para usar llamadas nativas
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
 declare var google;
 
 @Component({
@@ -25,6 +28,9 @@ export class DetallePage implements OnInit,OnDestroy {
   mapa=null;
   marker=null;
   watch:any;
+
+  //Numero del Cliente, debe llegar en la notificacion
+  numberClient:string = "0989878654";
 
   
   directionsService = new google.maps.DirectionsService();
@@ -47,7 +53,8 @@ export class DetallePage implements OnInit,OnDestroy {
     public shareData: ShareDataService,
     private router: Router,
     private detalle:DetalleServicioService,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private callNumber: CallNumber,
     ) {
   }
   ngOnDestroy(){
@@ -68,6 +75,18 @@ export class DetallePage implements OnInit,OnDestroy {
     //this.watchPosition();
     //window.location.reload()
   } 
+
+  callByCellphone(){
+    return this.callNumber.callNumber(this.numberClient, true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.error('Error launching dialer', err));
+  }
+
+  chatWithClient(){
+    return this.callNumber.callNumber(this.numberClient, true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.error('Error launching dialer', err));
+  }
 
     //Funcion para cargar el mapa y dibujar la mejor ruta
   async loadMap() {
@@ -231,5 +250,7 @@ export class DetallePage implements OnInit,OnDestroy {
     });
     return await popover.present();
   }
+  
+  
 
 }

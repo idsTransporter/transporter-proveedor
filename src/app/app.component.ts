@@ -28,6 +28,7 @@ import { ShareDataService } from './services/share-data.service';
 import { PopoverDetalleComponent } from './components/popover-detalle/popover-detalle.component';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
+    
     //private navParams: NavParams,
 
   ) {
