@@ -22,5 +22,8 @@ Los guards en ionic son los encargados de definir si en cierto punto de la aplic
 > Crear un nuevo guard con `ionic generate guard guards/name-guard`.
 Esto creara un guard denominado **_name-guard_** en el directorio **_guards_**.
 
+## Probando la integracion con Pivotal Tracker
+> B. Santos
+
 
 
