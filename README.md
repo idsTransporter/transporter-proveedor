@@ -8,12 +8,12 @@ Proyecto de app móvil para el proveedor de Transporter.
 > Desde el directorio de la app usar `npm install`.
 
 ## Generación de páginas nuevas
-Cada pagina representa una visualizacion de la aplicacion movil, una pagina puede estar compuesta por varios componentes.
+Cada página representa una visualizacion de la aplicacion movil, una pagina puede estar compuesta por varios componentes.
 > Crear una nueva pagina con `ionic generate page pages/name-page`.
 Esto creara una pagina, visualizacion, denominada **_name-page_** en el directorio **_pages_**.
 
 ## Generación de servicios nuevos
-Un servicio es una funcionalidad que permite la conexion con recursos extras como el uso de librerias de terceros, intercambio de informacion con API's o uso de una BD.
+Un servicio es una funcionalidad que permite la conexión con recursos extras como el uso de librerias de terceros, intercambio de informacion con API's o uso de una BD.
 > Crear un nuevo servicio con `ionic generate service services/name-service`.
 Esto creara un servicio, archivo .ts, denominado **_name-service_** en el directorio **_services_**.
 
