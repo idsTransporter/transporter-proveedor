@@ -9,6 +9,7 @@ import { PopoverController} from '@ionic/angular';
 
 
 //Para las push notifications
+import { FcmService } from './services/fcm.service';
 import {
   Plugins,
   PushNotification,
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
-    
+    private FcmService: FcmService,
     //private navParams: NavParams,
 
   ) {
@@ -55,99 +56,7 @@ export class AppComponent implements OnInit {
   }
    
   ngOnInit() {
-    console.log('Initializing HomePage');
-
-    /*
-    * Solicitar permiso para usar notificaciones push
-    * iOS solicitará al usuario y regresará si les concedió permiso o no
-    *m Android sólo concederá sin preguntar
-    */
-    PushNotifications.requestPermission().then( result => {
-      if (result.granted) {
-        //  Regístrese en Apple / Google para recibir push a través de APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Manejo de errores
-        console.error("ERROR> Linea 42 home.page.ts")
-      }
-    });
-
-    /*PushNotifications.addListener('registration',
-      (token: PushNotificationToken) => {
-        //alert('Push registration success, token: ' + token.value);
-        this.presentAlert(token.value)
-      }
-    );*/
-
-    PushNotifications.addListener('registrationError',
-      (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
-      }
-    );
-
-    PushNotifications.addListener('pushNotificationReceived',
-    async (notification:  PushNotification) => {
-        let origin=JSON.parse(notification.data.inicio);
-        console.log('Inicio> ',typeof(origin))//object
-        console.log('Inicio> ',typeof(origin.lat))
-        let destiny=JSON.parse(notification.data.fin);
-        console.log('Fin> ',typeof(destiny.lng))
-
-        let notObjeto = {
-          'title':notification.title,
-          'inicio':origin,
-          'fin':destiny,
-          'hora':notification.data.hora,
-          'metodoPago':notification.data.metodoPago,
-          'valor':notification.data.valor,
-        }
-
-        this.shareData.nombreNot$.emit(JSON.stringify(notification));
-
-        this.shareData.notObj$.emit(notObjeto);
-
-        this.shareData.notificacion = notification;
-        this.shareData.detalleServicio=notification;
-        //this.presentAlertConfirm(notification);
-        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.inicio);
-        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.fin);
-
-
-        this.presentPopoverDetalle(notification);
-      }
-    );
-
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      async (notification: PushNotificationActionPerformed) => {
-        //alert('Push action performed: ' + JSON.stringify(notification));
-        
-        if (notification.notification.data) {
-          let isCompleteRouter = await this.router.navigate(['/tabs'])
-          if(isCompleteRouter){
-            let origin=JSON.parse(notification.notification.data.inicio);
-            console.log('Inicio> ',typeof(origin))//object
-            console.log('Inicio> ',typeof(origin.lat))
-            let destiny=JSON.parse(notification.notification.data.fin);
-            console.log('Fin> ',typeof(destiny.lng))
-  
-          let notObjeto = {
-            'title':notification.notification.title,
-            'inicio':origin,
-            'fin':destiny,
-            'hora':notification.notification.data.hora,
-            'metodoPago':notification.notification.data.metodoPago,
-            'valor':notification.notification.data.valor,
-          }
-  
-         
-          this.shareData.notificacion=notification;
-          this.shareData.detalleServicio=notification;
-          this.presentPopoverDetalle(notification);
-          }
-          
-        }
-      }
-    );
+    
   }
 
 
@@ -155,6 +64,9 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    
+      //Disparador de las push notifications
+      this.FcmService.initPush();
     });
   }
 
