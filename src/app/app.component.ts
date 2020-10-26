@@ -115,37 +115,6 @@ export class AppComponent implements OnInit {
       }
     );
 
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      async (notification: PushNotificationActionPerformed) => {
-        //alert('Push action performed: ' + JSON.stringify(notification));
-        
-        if (notification.notification.data) {
-          let isCompleteRouter = await this.router.navigate(['/tabs'])
-          if(isCompleteRouter){
-            let origin=JSON.parse(notification.notification.data.inicio);
-            console.log('Inicio> ',typeof(origin))//object
-            console.log('Inicio> ',typeof(origin.lat))
-            let destiny=JSON.parse(notification.notification.data.fin);
-            console.log('Fin> ',typeof(destiny.lng))
-  
-          let notObjeto = {
-            'title':notification.notification.title,
-            'inicio':origin,
-            'fin':destiny,
-            'hora':notification.notification.data.hora,
-            'metodoPago':notification.notification.data.metodoPago,
-            'valor':notification.notification.data.valor,
-          }
-  
-         
-          this.shareData.notificacion=notification;
-          this.shareData.detalleServicio=notification;
-          this.presentPopoverDetalle(notification);
-          }
-          
-        }
-      }
-    );
   }
 
 
@@ -171,7 +140,10 @@ export class AppComponent implements OnInit {
   on_logout(){
     this.AFauth.logout();
   }
- 
+
+  
+
+  
   async presentPopoverDetalle(notification) {
     let title=notification.title;
     let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
