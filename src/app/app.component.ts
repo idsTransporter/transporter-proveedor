@@ -26,6 +26,7 @@ import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
 import { ShareDataService } from './services/share-data.service';
 import { PopoverDetalleComponent } from './components/popover-detalle/popover-detalle.component';
+import { FcmService } from './services/fcm.service';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
+    private fcmService: FcmService,
     //private navParams: NavParams,
 
   ) {
@@ -122,6 +124,9 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      //Initializar las PushNotifications
+      this.fcmService.initPush();
     });
   }
 
