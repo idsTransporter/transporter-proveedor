@@ -30,6 +30,7 @@ import { PopoverDetalleComponent } from './components/popover-detalle/popover-de
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
-    private FcmService: FcmService,
+    private fcmService: FcmService,
     //private navParams: NavParams,
 
   ) {
@@ -64,9 +65,9 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-    
-      //Disparador de las push notifications
-      this.FcmService.initPush();
+
+      //Initializar las PushNotifications
+      this.fcmService.initPush();
     });
   }
 
@@ -85,7 +86,10 @@ export class AppComponent implements OnInit {
   on_logout(){
     this.AFauth.logout();
   }
- 
+
+  
+
+  
   async presentPopoverDetalle(notification) {
     let title=notification.title;
     let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);

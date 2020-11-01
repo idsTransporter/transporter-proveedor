@@ -7,14 +7,14 @@ export const environment = {
 };
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBMKSh9KDGw0wJUiXjDFDhY3-Br-wxb_Zg",
-  authDomain: "transporter-careapp.firebaseapp.com",
-  databaseURL: "https://transporter-careapp.firebaseio.com",
-  projectId: "transporter-careapp",
-  storageBucket: "transporter-careapp.appspot.com",
-  messagingSenderId: "1016512674468",
-  appId: "1:1016512674468:web:617d22f318f77f1cc14431",
-  measurementId: "G-8B5Q54X7BW"
+  apiKey: "AIzaSyD1yk1QZHkYQWxO-JZ5idDHcfHpkKzf0tg",
+  authDomain: "vehicular-287023.firebaseapp.com",
+  databaseURL: "https://vehicular-287023.firebaseio.com",
+  projectId: "vehicular-287023",
+  storageBucket: "vehicular-287023.appspot.com",
+  messagingSenderId: "627980958884",
+  appId: "1:627980958884:web:193ff105b8c4426198fa31",
+  measurementId: "G-E8NTD36CBD"
 };
 
 /*

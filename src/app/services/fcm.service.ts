@@ -108,27 +108,30 @@ export class FcmService {
         //alert('Push action performed: ' + JSON.stringify(notification));
         
         if (notification.notification.data) {
-          let isCompleteRouter = await this.router.navigate(['/tabs'])
+          console.log('ActionPerformed, notification: '+ JSON.stringify(notification.notification))
+          console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification.data))
+          let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
           if(isCompleteRouter){
-            let origin=JSON.parse(notification.notification.data.inicio);
-            console.log('Inicio> ',typeof(origin))//object
-            console.log('Inicio> ',typeof(origin.lat))
-            let destiny=JSON.parse(notification.notification.data.fin);
-            console.log('Fin> ',typeof(destiny.lng))
+            console.log('LLEGO A LA TABS')
+          //   let origin=JSON.parse(notification.notification.data.inicio);
+          //   console.log('Inicio> ',typeof(origin))//object
+          //   console.log('Inicio> ',typeof(origin.lat))
+          //   let destiny=JSON.parse(notification.notification.data.fin);
+          //   console.log('Fin> ',typeof(destiny.lng))
   
-          let notObjeto = {
-            'title':notification.notification.title,
-            'inicio':origin,
-            'fin':destiny,
-            'hora':notification.notification.data.hora,
-            'metodoPago':notification.notification.data.metodoPago,
-            'valor':notification.notification.data.valor,
-          }
+          // let notObjeto = {
+          //   'title':notification.notification.title,
+          //   'inicio':origin,
+          //   'fin':destiny,
+          //   'hora':notification.notification.data.hora,
+          //   'metodoPago':notification.notification.data.metodoPago,
+          //   'valor':notification.notification.data.valor,
+          // }
   
          
-          this.shareData.notificacion=notification;
-          this.shareData.detalleServicio=notification;
-          this.presentPopoverDetalle(notification);
+          // this.shareData.notificacion=notification;
+          // this.shareData.detalleServicio=notification;
+          // this.presentPopoverDetalle(notification);
           }
           
         }
