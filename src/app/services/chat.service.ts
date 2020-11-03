@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators'
 import { ChatRoom } from '../interfaces/chat-room';
@@ -57,10 +58,20 @@ export class ChatService {
     )
   }
 
-  getMessages(chatRoom){
+  getMessages(chatRoom:string){
     console.log('cg> ',chatRoom)
-    this.messagesCollection = this.afs.collection<any>(`/chatRoomsTest/${chatRoom}/messages`);
+    this.messagesCollection = this.afs.collection<any>(`/chatRoomsTest/${chatRoom}/messages`,(ref)=>ref.orderBy('createdAt'));
     return this.messagesCollection.valueChanges();
+  }
+
+  addChatMessage(chatRoom:string,msg:string){
+    return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(
+      {
+        msg,
+        from: this.authService.userApp.uid,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }
+    );
   }
 /*
   getChatMessages(){

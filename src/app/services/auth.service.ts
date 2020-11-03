@@ -17,6 +17,7 @@ export class AuthService {
 
   private userInfor: Observable<firebase.User>;
   public userApp: User;
+  public currentUser:any;
 
   constructor(
     private AFauth: AngularFireAuth,
@@ -24,6 +25,7 @@ export class AuthService {
     public toastController: ToastController
   ) {
     this.getUserInformation();
+    this.getCurrentUser();
    }
 
   /**
@@ -119,7 +121,15 @@ export class AuthService {
         }
       }
     );
+  }
 
-    
+  getCurrentUser(){
+    this.AFauth.onAuthStateChanged(
+      user => {
+        console.log('Change: ',user);
+        this.currentUser = user;
+      }
+    );
+    return this.currentUser;
   }
 }
