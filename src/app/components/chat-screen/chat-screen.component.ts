@@ -4,6 +4,9 @@ import { Message } from 'src/app/interfaces/message';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
+//Tomar fotos y cargar imagenes
+import { PhotoCameraService } from 'src/app/services/photo-camera.service';
+
 
 
 @Component({
@@ -24,6 +27,7 @@ export class ChatScreenComponent implements OnInit {
     public chatService: ChatService,
     private nav_params: NavParams,
     private authService: AuthService,
+    public photoService: PhotoCameraService,
   ) {
     
    }
@@ -53,6 +57,10 @@ export class ChatScreenComponent implements OnInit {
     );
     this.chat=this.nav_params.get('chat');
     
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
   sendMessage(){
