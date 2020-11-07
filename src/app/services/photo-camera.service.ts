@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 //Dependencias para el uso de la camara y acceso a los archivos
 import {
   Plugins,
@@ -58,7 +59,6 @@ export class PhotoCameraService {
     //   webviewPath: capturedPhoto.webPath
     // });
     this.photos.unshift(savedImgFile);
-
 
     //Almacenar el arreglo de photos, persistencia de imgs
     Storage.set({
