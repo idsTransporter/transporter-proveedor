@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 
 import { ToastController } from '@ionic/angular';
+import { User } from '../interfaces/user';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -13,11 +15,18 @@ import { ToastController } from '@ionic/angular';
 })
 export class AuthService {
 
+  private userInfor: Observable<firebase.User>;
+  public userApp: User;
+  public currentUser:any;
+
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
     public toastController: ToastController
-  ) { }
+  ) {
+    this.getUserInformation();
+    this.getCurrentUser();
+   }
 
   /**
    * Login de respuesta asincrona que en caso de ser exitosa 
@@ -31,7 +40,7 @@ export class AuthService {
       (resolve, reject) => {
         this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
           .then(res => {
-            console.log(res)
+            console.log('Credential: ',res)
             resolve(res)
           }).catch(
             err => {
@@ -97,5 +106,30 @@ export class AuthService {
       position: 'top',
     });
     toast.present();
+  }
+
+  getUserInformation(){
+    this.userInfor= this.AFauth.user;
+
+    this.userInfor.subscribe(
+      user =>{
+        console.log('Infor > ',user);
+        this.userApp={
+          uid:user.uid,
+          email:user.email,
+          phoneNumber:user.phoneNumber,
+        }
+      }
+    );
+  }
+
+  getCurrentUser(){
+    this.AFauth.onAuthStateChanged(
+      user => {
+        console.log('Change: ',user);
+        this.currentUser = user;
+      }
+    );
+    return this.currentUser;
   }
 }

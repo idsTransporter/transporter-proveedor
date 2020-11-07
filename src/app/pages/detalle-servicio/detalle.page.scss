@@ -62,3 +62,14 @@ ion-content {
   grid-row: row gap 10px;
 
 }
+
+#chatbubble{
+  --padding-top: 15px;
+}
+#chatbubbleF{
+  padding-left: 15px;
+}
+
+ion-fab-button{
+  margin:5px;
+}
