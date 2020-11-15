@@ -62,6 +62,9 @@ export class FcmService {
       (token: PushNotificationToken) => {
         //alert('Push registration success, token: ' + token.value);
         console.log('My token: ' + JSON.stringify(token))
+        //Enviar post con el token
+        
+        
       }
     );
 
