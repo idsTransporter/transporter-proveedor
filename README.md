@@ -26,7 +26,7 @@ Esto creara un guard denominado **_name-guard_** en el directorio **_guards_**.
 Se ubica dentro de la carpeta donde se quiere el nuevo componente y se escribe
 >`ng generate component nombreComponente`
 
-## Probando la integracion con Pivotal Tracker
-> B. Santos Santistevan | HU: [#173933125]
+## Integración con Pivotal Tracker
+> `[#id de la HU] Comentario`
 
 
