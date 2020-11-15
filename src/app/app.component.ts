@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "./services/auth.service";
-import { Platform } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
@@ -27,7 +27,12 @@ import { AlertController } from '@ionic/angular';
 //Compartir la data a traves de un service
 import { ShareDataService } from './services/share-data.service';
 import { PopoverDetalleComponent } from './components/popover-detalle/popover-detalle.component';
+import { HttpService } from './services/http.service';
+import { Observable } from 'rxjs';
 
+import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
+
+// import { IonRouterOutlet } from '@ionic/angular';
 
 
 
@@ -38,6 +43,7 @@ import { PopoverDetalleComponent } from './components/popover-detalle/popover-de
 })
 export class AppComponent implements OnInit {
    geocoder = new google.maps.Geocoder();
+   politicas: Observable<any>;
 
   constructor(
     private AFauth: AuthService,
@@ -50,6 +56,9 @@ export class AppComponent implements OnInit {
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
     private fcmService: FcmService,
+    private httpService: HttpService,
+    private modalCtrl:ModalController,
+    // private routerOutlet: IonRouterOutlet,
     //private navParams: NavParams,
 
   ) {
@@ -87,9 +96,6 @@ export class AppComponent implements OnInit {
     this.AFauth.logout();
   }
 
-  
-
-  
   async presentPopoverDetalle(notification) {
     let title=notification.title;
     let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
@@ -113,6 +119,29 @@ export class AppComponent implements OnInit {
       translucent: true
     });
     return await popover.present();
+  }
+
+  getPoliticas(){
+    console.log("POLITICAS:")
+    this.politicas=(this.httpService.getPoliticas());
+    this.politicas.subscribe(
+      res => {
+        console.log(res);
+        this.presentModal(res);
+      }
+    );
+  }
+
+  async presentModal(res) {
+    const modal = await this.modalCtrl.create({
+      component: TerminosCondicionesComponent,
+      componentProps: {
+        'politicas': res,
+      },
+      swipeToClose: true,
+      // presentingElement: this.routerOutlet.nativeEl
+    });
+    return await modal.present();
   }
 }
 

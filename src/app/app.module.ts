@@ -23,6 +23,11 @@ import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/po
 //Para usar llamadas nativas
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
+import { HttpService } from "./services/http.service";
+
+
+
+
 @NgModule({
   declarations: [AppComponent, PopoverInicioFinComponent],
   entryComponents: [PopoverInicioFinComponent],
@@ -34,12 +39,14 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     ComponentsModule,
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,LaunchNavigator,
     CallNumber,
+    HttpService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
