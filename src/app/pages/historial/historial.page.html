@@ -1,0 +1,22 @@
+<app-header-back title="Mi Historial">
+</app-header-back>
+
+<ion-content padding >
+  <div>
+    <app-rating rating=4 ></app-rating>
+  </div>
+  <div>
+    <ion-virtual-scroll [items]="items" approxItemHeight="300px">
+      <ion-card *virtualItem="let item; let itemBounds = bounds;">
+        <div>
+          <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
+        </div>
+      <ion-card-header>
+        <ion-card-title>{{ item.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ item.content }}</ion-card-content>
+      </ion-card>
+    </ion-virtual-scroll>
+  </div>
+  
+</ion-content>

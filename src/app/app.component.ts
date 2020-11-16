@@ -143,6 +143,11 @@ export class AppComponent implements OnInit {
     });
     return await modal.present();
   }
+
+  showHistorial(){
+    this.router.navigate(['/historial']);
+    console.log("HISTORIAL");
+  }
 }
 
 

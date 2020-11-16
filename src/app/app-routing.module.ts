@@ -60,7 +60,11 @@ const routes: Routes = [
   {
     path: 'pago',
     loadChildren: () => import('./pages/pago-servicio/pago-servicio.module').then( m => m.PagoServicioPageModule)
+  },  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   }
+
 
 
 ];

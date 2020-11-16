@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChatScreenComponent } from './chat-screen/chat-screen.component';
 import { FormsModule } from '@angular/forms';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
+import { RatingComponent } from './rating/rating.component';
 
 
 
@@ -13,11 +14,13 @@ import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-co
     HeaderBackComponent,
     ChatScreenComponent,
     TerminosCondicionesComponent,
+    RatingComponent,
   ],
   exports:[
     HeaderBackComponent,
     ChatScreenComponent,
     TerminosCondicionesComponent,
+    RatingComponent,
   ],
   imports: [
     IonicModule,
