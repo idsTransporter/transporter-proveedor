@@ -82,6 +82,9 @@ export class FcmService {
         let destiny=JSON.parse(notification.data.fin);
         console.log('Fin> ',typeof(destiny.lng))
 
+        let s=this.getBodyCareApp(notification);
+        console.log(s);
+
         let notObjeto = {
           'title':notification.title,
           'inicio':origin,
@@ -166,6 +169,25 @@ export class FcmService {
       translucent: true
     });
     return await popover.present();
+  }
+
+
+  getBodyCareApp(notification: PushNotification){
+    let title=(notification.title == null || undefined) ? "title is Empty" : notification.title;
+    let body=(notification.body== null || undefined) ? "body is Empty" : JSON.parse(notification.body);
+    let data=(notification.data == null || undefined) ? "data is Empty" : JSON.parse(notification.data);
+ 
+    let servicio = {
+      title : title,
+      body : body,
+      data: data,
+    }
+ 
+    console.log('t> ',typeof(servicio.title));
+    console.log('b> ',typeof(servicio.body));
+    console.log('d> ',typeof(servicio.data));
+    
+    return servicio;
   }
 
 
