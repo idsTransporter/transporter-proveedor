@@ -1,22 +1,79 @@
 <app-header-back title="Mi Historial">
+
 </app-header-back>
 
-<ion-content padding >
+<ion-toolbar color="dark">
+  <ion-buttons slot="secondary">
+    <ion-button>
+      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+    </ion-button>
+    <ion-button>
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+    <ion-button color="danger">
+      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Dark Toolbar</ion-title>
+</ion-toolbar>
+
+<ion-toolbar color="secondary">
+  <ion-buttons slot="secondary">
+    <ion-button>
+      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+    </ion-button>
+    <ion-button>
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+    <ion-button color="primary">
+      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Secondary Toolbar</ion-title>
+</ion-toolbar>
+
+<ion-toolbar>
+  <ion-buttons slot="primary">
+    <ion-button (click)="clickedSearch()">
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-searchbar placeholder="Search Favorites"></ion-searchbar>
+</ion-toolbar>
+
+<ion-toolbar>
+  <ion-segment value="all">
+    <ion-segment-button value="all">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      Favorites
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+<ion-content padding>
+
   <div>
-    <app-rating rating=4 ></app-rating>
+    <app-rating rating=4></app-rating>
   </div>
+  
   <div>
     <ion-virtual-scroll [items]="items" approxItemHeight="300px">
       <ion-card *virtualItem="let item; let itemBounds = bounds;">
         <div>
           <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
         </div>
-      <ion-card-header>
-        <ion-card-title>{{ item.name }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>{{ item.content }}</ion-card-content>
+        <ion-card-header>
+          <ion-card-title>{{ item.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{ item.content }}</ion-card-content>
       </ion-card>
     </ion-virtual-scroll>
   </div>
-  
+
 </ion-content>

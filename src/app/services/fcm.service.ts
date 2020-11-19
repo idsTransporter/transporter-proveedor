@@ -177,6 +177,10 @@ export class FcmService {
 
 
   getBodyCareApp(notification: PushNotification) {
+    console.log(notification.title);
+    console.log(notification.body);
+    console.log(notification.data);
+    
     let title = (notification.title == null || undefined) ? "title is Empty" : notification.title;
     let body = (notification.body == null || undefined) ? "body is Empty" : JSON.parse(notification.body);
     let data = (notification.data == null || undefined) ? "data is Empty" : JSON.parse(notification.data);
