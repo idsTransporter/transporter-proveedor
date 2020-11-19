@@ -28,7 +28,7 @@ export class FcmService {
   constructor(
     private router: Router,
     private shareData: ShareDataService,
-    private detalle:DetalleServicioService,
+    private detalle: DetalleServicioService,
     private popoverController: PopoverController,
   ) {
 
@@ -40,8 +40,6 @@ export class FcmService {
     }
   }
 
-
-  
   private registerPush() {
     /*
     * Solicitar permiso para usar notificaciones push
@@ -54,7 +52,7 @@ export class FcmService {
         PushNotifications.register();
       } else {
         // Manejo de errores
-        console.error("ERROR> Linea 42 home.page.ts")
+        console.error("ERROR> RequestPermission")
       }
     });
 
@@ -63,35 +61,38 @@ export class FcmService {
         //alert('Push registration success, token: ' + token.value);
         console.log('My token: ' + JSON.stringify(token))
         //Enviar post con el token
-        
-        
+        //Incluir la funcion de CareApp senDeviceToken  
+
       }
     );
 
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        console.error('Error on registration: ' + JSON.stringify(error));
+        console.error('ERROR> On registration: ' + JSON.stringify(error));
       }
     );
 
     PushNotifications.addListener('pushNotificationReceived',
-    async (notification:  PushNotification) => {
-        let origin=JSON.parse(notification.data.inicio);
-        console.log('Inicio> ',typeof(origin))//object
-        console.log('Inicio> ',typeof(origin.lat))
-        let destiny=JSON.parse(notification.data.fin);
-        console.log('Fin> ',typeof(destiny.lng))
+      async (notification: PushNotification) => {
 
-        let s=this.getBodyCareApp(notification);
+
+        let s = this.getBodyCareApp(notification);
         console.log(s);
 
+
+        let origin = JSON.parse(notification.data.inicio);
+        console.log('Inicio> ', typeof (origin))//object
+        console.log('Inicio> ', typeof (origin.lat))
+        let destiny = JSON.parse(notification.data.fin);
+        console.log('Fin> ', typeof (destiny.lng))
+
         let notObjeto = {
-          'title':notification.title,
-          'inicio':origin,
-          'fin':destiny,
-          'hora':notification.data.hora,
-          'metodoPago':notification.data.metodoPago,
-          'valor':notification.data.valor,
+          'title': notification.title,
+          'inicio': origin,
+          'fin': destiny,
+          'hora': notification.data.hora,
+          'metodoPago': notification.data.metodoPago,
+          'valor': notification.data.valor,
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -99,10 +100,10 @@ export class FcmService {
         this.shareData.notObj$.emit(notObjeto);
 
         this.shareData.notificacion = notification;
-        this.shareData.detalleServicio=notification;
+        this.shareData.detalleServicio = notification;
         //this.presentAlertConfirm(notification);
-        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.inicio);
-        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.fin);
+        this.shareData.inicio = await this.detalle.geocodeLatLng(notification.data.inicio);
+        this.shareData.fin = await this.detalle.geocodeLatLng(notification.data.fin);
 
 
         this.presentPopoverDetalle(notification);
@@ -112,34 +113,34 @@ export class FcmService {
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
         //alert('Push action performed: ' + JSON.stringify(notification));
-        
+
         if (notification.notification.data) {
-          console.log('ActionPerformed, notification: '+ JSON.stringify(notification.notification))
-          console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification.data))
+          console.log('ActionPerformed, notification: ' + JSON.stringify(notification.notification))
+          console.log('ActionPerformed, data: ' + JSON.stringify(notification.notification.data))
           let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
-          if(isCompleteRouter){
+          if (isCompleteRouter) {
             console.log('LLEGO A LA TABS')
-          //   let origin=JSON.parse(notification.notification.data.inicio);
-          //   console.log('Inicio> ',typeof(origin))//object
-          //   console.log('Inicio> ',typeof(origin.lat))
-          //   let destiny=JSON.parse(notification.notification.data.fin);
-          //   console.log('Fin> ',typeof(destiny.lng))
-  
-          // let notObjeto = {
-          //   'title':notification.notification.title,
-          //   'inicio':origin,
-          //   'fin':destiny,
-          //   'hora':notification.notification.data.hora,
-          //   'metodoPago':notification.notification.data.metodoPago,
-          //   'valor':notification.notification.data.valor,
-          // }
-  
-         
-          // this.shareData.notificacion=notification;
-          // this.shareData.detalleServicio=notification;
-          // this.presentPopoverDetalle(notification);
+            //   let origin=JSON.parse(notification.notification.data.inicio);
+            //   console.log('Inicio> ',typeof(origin))//object
+            //   console.log('Inicio> ',typeof(origin.lat))
+            //   let destiny=JSON.parse(notification.notification.data.fin);
+            //   console.log('Fin> ',typeof(destiny.lng))
+
+            // let notObjeto = {
+            //   'title':notification.notification.title,
+            //   'inicio':origin,
+            //   'fin':destiny,
+            //   'hora':notification.notification.data.hora,
+            //   'metodoPago':notification.notification.data.metodoPago,
+            //   'valor':notification.notification.data.valor,
+            // }
+
+
+            // this.shareData.notificacion=notification;
+            // this.shareData.detalleServicio=notification;
+            // this.presentPopoverDetalle(notification);
           }
-          
+
         }
       }
     );
@@ -147,46 +148,46 @@ export class FcmService {
   }
 
   async presentPopoverDetalle(notification) {
-    let title=notification.title;
-    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
-    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
-    let hora=notification.data.hora;
-    let metodoPago=notification.data.metodoPago;
-    let valor=notification.data.valor;
+    let title = notification.title;
+    let strInicio = await this.detalle.geocodeLatLng(notification.data.inicio);
+    let strFin = await this.detalle.geocodeLatLng(notification.data.fin);
+    let hora = notification.data.hora;
+    let metodoPago = notification.data.metodoPago;
+    let valor = notification.data.valor;
 
     const popover = await this.popoverController.create({
       component: PopoverDetalleComponent,
       cssClass: 'my-custom-class',
-      componentProps:{
-         title:title,
-         inicio:strInicio,
-         fin:strFin,
-         hora:hora,
-         metodoPago:metodoPago,
-         valor:valor
+      componentProps: {
+        title: title,
+        inicio: strInicio,
+        fin: strFin,
+        hora: hora,
+        metodoPago: metodoPago,
+        valor: valor
       },
-      mode:"md",
+      mode: "md",
       translucent: true
     });
     return await popover.present();
   }
 
 
-  getBodyCareApp(notification: PushNotification){
-    let title=(notification.title == null || undefined) ? "title is Empty" : notification.title;
-    let body=(notification.body== null || undefined) ? "body is Empty" : JSON.parse(notification.body);
-    let data=(notification.data == null || undefined) ? "data is Empty" : JSON.parse(notification.data);
- 
+  getBodyCareApp(notification: PushNotification) {
+    let title = (notification.title == null || undefined) ? "title is Empty" : notification.title;
+    let body = (notification.body == null || undefined) ? "body is Empty" : JSON.parse(notification.body);
+    let data = (notification.data == null || undefined) ? "data is Empty" : JSON.parse(notification.data);
+
     let servicio = {
-      title : title,
-      body : body,
+      title: title,
+      body: body,
       data: data,
     }
- 
-    console.log('t> ',typeof(servicio.title));
-    console.log('b> ',typeof(servicio.body));
-    console.log('d> ',typeof(servicio.data));
-    
+
+    console.log('t> ', typeof (servicio.title));
+    console.log('b> ', typeof (servicio.body));
+    console.log('d> ', typeof (servicio.data));
+
     return servicio;
   }
 
