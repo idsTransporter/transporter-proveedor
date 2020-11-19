@@ -77,36 +77,39 @@ export class FcmService {
 
 
         let s = this.getBodyCareApp(notification);
-        console.log(s);
+        console.log("CAREAPP: ", s);
+
+        if (notification.data !== (null || undefined)) {
 
 
-        let origin = JSON.parse(notification.data.inicio);
-        console.log('Inicio> ', typeof (origin))//object
-        console.log('Inicio> ', typeof (origin.lat))
-        let destiny = JSON.parse(notification.data.fin);
-        console.log('Fin> ', typeof (destiny.lng))
+          let origin = JSON.parse(notification.data.inicio);
+          console.log('Inicio> ', typeof (origin))//object
+          console.log('Inicio> ', typeof (origin.lat))
+          let destiny = JSON.parse(notification.data.fin);
+          console.log('Fin> ', typeof (destiny.lng))
 
-        let notObjeto = {
-          'title': notification.title,
-          'inicio': origin,
-          'fin': destiny,
-          'hora': notification.data.hora,
-          'metodoPago': notification.data.metodoPago,
-          'valor': notification.data.valor,
+          let notObjeto = {
+            'title': notification.title,
+            'inicio': origin,
+            'fin': destiny,
+            'hora': notification.data.hora,
+            'metodoPago': notification.data.metodoPago,
+            'valor': notification.data.valor,
+          }
+
+          this.shareData.nombreNot$.emit(JSON.stringify(notification));
+
+          this.shareData.notObj$.emit(notObjeto);
+
+          this.shareData.notificacion = notification;
+          this.shareData.detalleServicio = notification;
+          //this.presentAlertConfirm(notification);
+          this.shareData.inicio = await this.detalle.geocodeLatLng(notification.data.inicio);
+          this.shareData.fin = await this.detalle.geocodeLatLng(notification.data.fin);
+
+
+          this.presentPopoverDetalle(notification);
         }
-
-        this.shareData.nombreNot$.emit(JSON.stringify(notification));
-
-        this.shareData.notObj$.emit(notObjeto);
-
-        this.shareData.notificacion = notification;
-        this.shareData.detalleServicio = notification;
-        //this.presentAlertConfirm(notification);
-        this.shareData.inicio = await this.detalle.geocodeLatLng(notification.data.inicio);
-        this.shareData.fin = await this.detalle.geocodeLatLng(notification.data.fin);
-
-
-        this.presentPopoverDetalle(notification);
       }
     );
 
