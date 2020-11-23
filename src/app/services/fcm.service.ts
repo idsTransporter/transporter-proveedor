@@ -75,12 +75,15 @@ export class FcmService {
     PushNotifications.addListener('pushNotificationReceived',
       async (notification: PushNotification) => {
 
+        console.error(notification);
 
         let s = this.getBodyCareApp(notification);
         console.log("CAREAPP: ", s);
 
         if (notification.data !== (null || undefined)) {
 
+
+          console.error("Entro en el if");
 
           let origin = JSON.parse(notification.data.inicio);
           console.log('Inicio> ', typeof (origin))//object
@@ -177,9 +180,9 @@ export class FcmService {
 
 
   getBodyCareApp(notification: PushNotification) {
-    console.log(notification.title);
-    console.log(notification.body);
-    console.log(notification.data);
+    // console.log(notification.title);
+    // console.log(notification.body);
+    // console.log(notification.data);
     
     let title = (notification.title == null || undefined) ? "title is Empty" : notification.title;
     let body = (notification.body == null || undefined) ? "body is Empty" : JSON.parse(notification.body);

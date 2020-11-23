@@ -2,66 +2,48 @@
 
 </app-header-back>
 
-<ion-toolbar color="dark">
-  <ion-buttons slot="secondary">
-    <ion-button>
-      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon slot="icon-only" name="search"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-buttons slot="primary">
-    <ion-button color="danger">
-      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-title>Dark Toolbar</ion-title>
-</ion-toolbar>
-
-<ion-toolbar color="secondary">
-  <ion-buttons slot="secondary">
-    <ion-button>
-      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon slot="icon-only" name="search"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-buttons slot="primary">
-    <ion-button color="primary">
-      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-title>Secondary Toolbar</ion-title>
-</ion-toolbar>
-
 <ion-toolbar>
-  <ion-buttons slot="primary">
-    <ion-button (click)="clickedSearch()">
-      <ion-icon slot="icon-only" name="search"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-searchbar placeholder="Search Favorites"></ion-searchbar>
-</ion-toolbar>
-
-<ion-toolbar>
-  <ion-segment value="all">
-    <ion-segment-button value="all">
-      All
-    </ion-segment-button>
-    <ion-segment-button value="favorites">
-      Favorites
-    </ion-segment-button>
-  </ion-segment>
+  <ion-title>RANKING</ion-title>
+  <ion-item text-align='center' lines="full">
+    <app-rating rating=4 size="large"></app-rating>
+  </ion-item>
 </ion-toolbar>
 
 <ion-content padding>
-
-  <div>
-    <app-rating rating=4></app-rating>
-  </div>
   
+  <ion-item>
+    <ion-title>
+      Title-Client
+      <ion-label> Date </ion-label>
+    </ion-title>  
+    <app-rating rating=4 size="small"></app-rating>
+    <ion-icon [name]="isFinished ? 'checkmark-outline' : 'close-outline' " slot='end'></ion-icon>
+  </ion-item>
+
+  <ion-card>
+    <ion-item>
+      <ion-title >
+        Title-Client
+        <ion-label> Date </ion-label>
+      </ion-title>
+      <app-rating rating=4 size="small"></app-rating>
+      <ion-icon [name]="isFinished ? 'checkmark-outline' : 'close-outline' " slot='end'></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item clas='ion-justify-content-between'>
+        <div class='ion-justify-content-start' >
+          <ion-label><h1>Title-Client</h1></ion-label>
+          <ion-label><h2>Date </h2></ion-label>
+        </div>
+        <app-rating rating=4 size="small"></app-rating>
+        <ion-icon [name]="isFinished ? 'checkmark-outline' : 'close-outline' "></ion-icon>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
   <div>
     <ion-virtual-scroll [items]="items" approxItemHeight="300px">
       <ion-card *virtualItem="let item; let itemBounds = bounds;">

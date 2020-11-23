@@ -25,6 +25,8 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { HttpService } from "./services/http.service";
 
+//Sotrage
+import { IonicStorageModule } from '@ionic/storage';
 
 
 
@@ -39,6 +41,7 @@ import { HttpService } from "./services/http.service";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     ComponentsModule,
+    IonicStorageModule.forRoot(),
 
   ],
   providers: [

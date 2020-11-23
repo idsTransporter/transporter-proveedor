@@ -18,7 +18,7 @@ export class TerminosCondicionesComponent implements OnInit {
   ngOnInit() {}
 
   closeModal(){
-    
+    this.modalCtrl.dismiss();
   }
 
 }
