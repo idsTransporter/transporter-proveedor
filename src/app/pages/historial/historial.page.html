@@ -11,7 +11,7 @@
 
 <ion-content padding>
   
-  <ion-item>
+  <ion-item (click)="presentModal()">
     <ion-title>
       Title-Client
       <ion-label> Date </ion-label>
@@ -21,7 +21,7 @@
   </ion-item>
 
   <ion-card>
-    <ion-item>
+    <ion-item (click)="presentModal()">
       <ion-title >
         Title-Client
         <ion-label> Date </ion-label>
@@ -33,7 +33,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item clas='ion-justify-content-between'>
+      <ion-item clas='ion-justify-content-between' (click)="presentModal()">
         <div class='ion-justify-content-start' >
           <ion-label><h1>Title-Client</h1></ion-label>
           <ion-label><h2>Date </h2></ion-label>
@@ -45,8 +45,8 @@
   </ion-card>
 
   <div>
-    <ion-virtual-scroll [items]="items" approxItemHeight="300px">
-      <ion-card *virtualItem="let item; let itemBounds = bounds;">
+    <ion-virtual-scroll [items]="items" approxItemHeight="310px">
+      <ion-card *virtualItem="let item; let itemBounds = bounds;" (click)="presentModal()">
         <div>
           <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
         </div>

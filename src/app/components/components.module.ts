@@ -6,6 +6,7 @@ import { ChatScreenComponent } from './chat-screen/chat-screen.component';
 import { FormsModule } from '@angular/forms';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 import { RatingComponent } from './rating/rating.component';
+import { HistorialDetallesComponent } from './historial-detalles/historial-detalles.component';
 
 
 
@@ -15,12 +16,14 @@ import { RatingComponent } from './rating/rating.component';
     ChatScreenComponent,
     TerminosCondicionesComponent,
     RatingComponent,
+    HistorialDetallesComponent,
   ],
   exports:[
     HeaderBackComponent,
     ChatScreenComponent,
     TerminosCondicionesComponent,
     RatingComponent,
+    HistorialDetallesComponent,
   ],
   imports: [
     IonicModule,

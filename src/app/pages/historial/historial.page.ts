@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { HistorialDetallesComponent } from 'src/app/components/historial-detalles/historial-detalles.component';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-historial',
@@ -28,7 +31,10 @@ export class HistorialPage implements OnInit {
 
   rotateImg = 0;
 
-  constructor() {
+  constructor(
+    private modalCtrl:ModalController,
+    private storage: StorageService,
+  ) {
     for (let i = 0; i < 1000; i++) {
       this.items.push({
         name: i + ' - ' + this.images[this.rotateImg],
@@ -60,6 +66,19 @@ export class HistorialPage implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  async presentModal() {
+    this.storage.getObject();//Sacado del Storage
+    const modal = await this.modalCtrl.create({
+      component: HistorialDetallesComponent,
+      // componentProps: {
+      //   'politicas': res,
+      // },
+      swipeToClose: true,
+      // presentingElement: this.routerOutlet.nativeEl
+    });
+    return await modal.present();
   }
 
 }

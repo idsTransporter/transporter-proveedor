@@ -8,6 +8,8 @@ import { isNullOrUndefined } from 'util';
 import { ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
+
 
 
 @Injectable({
@@ -15,18 +17,23 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private userInfor: Observable<firebase.User>;
+  public userInfor: Observable<firebase.User | null>;
   public userApp: User;
-  public currentUser:any;
+
+
+  // public currentUser: any;
+
+  //Para autenticacion fb y get datos
+  public userFirebase: Observable<firebase.User | null>;
 
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private storage: StorageService,
   ) {
-    this.getUserInformation();
-    this.getCurrentUser();
-   }
+
+  }
 
   /**
    * Login de respuesta asincrona que en caso de ser exitosa 
@@ -40,17 +47,56 @@ export class AuthService {
       (resolve, reject) => {
         this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
           .then(res => {
-            console.log('Credential: ',res)
+            console.log('Credential: ', res)
+            console.log(typeof res);
+
+            //State
+            this.userFirebase = this.AFauth.authState;
+            console.log("auth value> "+this.userFirebase);
+            console.log("auth type> "+ typeof(this.userFirebase));
+
             resolve(res)
-          }).catch(
-            err => {
-              console.error('ERROR> En la auth. Linea 16 in auth.service.ts' + err)
-              reject(err)
-            }
+          }).catch(err => {
+            console.log('Error: ', err);
+            console.log(typeof err);
+            console.error('ERROR> En la auth. Linea 16 in auth.service.ts' + err);
+            reject(err)
+          }
           )
       }
     );
   }
+
+  // Obtener el estado de autenticación
+  get authenticated(): boolean {
+    return this.userFirebase != null; // True ó False
+  }
+
+  // Obtener el observador del usuario actual
+  get currentUser(): Observable<firebase.User | null> {
+    return this.userFirebase;
+  }
+
+  // getUserInformation() {
+  //   this.userInfor = this.AFauth.user;
+
+  //   this.userInfor.subscribe(
+  //     user => {
+  //       if (user) {
+  //         console.log('Infor auth user> ', user);
+  //         this.userApp = {
+  //           uid: user.uid,
+  //           email: user.email,
+  //           phoneNumber: user.phoneNumber,
+  //         }
+  //         console.log('Infor auth userApp> ', this.userApp);
+  //       }
+  //     },
+  //     error => {
+  //       console.error("Ah ocurrido un error: " + error);
+  //     }
+  //   );
+  // }
 
 
   /**
@@ -63,6 +109,8 @@ export class AuthService {
       .then(() => {
         this.router.navigate(['/login'])
         console.log('Redirigir')
+
+
       }
       ).catch(
         err => {
@@ -108,28 +156,13 @@ export class AuthService {
     toast.present();
   }
 
-  getUserInformation(){
-    this.userInfor= this.AFauth.user;
-
-    this.userInfor.subscribe(
-      user =>{
-        console.log('Infor > ',user);
-        this.userApp={
-          uid:user.uid,
-          email:user.email,
-          phoneNumber:user.phoneNumber,
-        }
-      }
-    );
-  }
-
-  getCurrentUser(){
-    this.AFauth.onAuthStateChanged(
-      user => {
-        console.log('Change: ',user);
-        this.currentUser = user;
-      }
-    );
-    return this.currentUser;
-  }
+  // getCurrentUser() {
+  //   this.AFauth.onAuthStateChanged(
+  //     user => {
+  //       console.log('Change: ', user);
+  //       this.currentUser = user;
+  //     }
+  //   );
+  //   return this.currentUser;
+  // }
 }
