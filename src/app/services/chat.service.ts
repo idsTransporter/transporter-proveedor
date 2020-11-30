@@ -29,7 +29,7 @@ export class ChatService {
   ) {
     this.chatCollection = this.afs.collection<any>('chatRoomsTest');
     this.chatRooms = this.chatCollection.snapshotChanges();
-
+    this.getUserInformation();
    }
 
   getChatRooms(){
@@ -48,6 +48,7 @@ export class ChatService {
               let uids =data.id.split('-');
               let uidProv= uids[0];
               let uidOther= uids[1];
+              
               let uidCurrent = this.authService.userApp.uid;
               console.log(this.authService.userApp);
               return (uidCurrent===uidProv || uidCurrent==uidOther)
@@ -56,6 +57,20 @@ export class ChatService {
         }
       )
     )
+  }
+
+  getUserInformation(){
+    console.log(this.authService.authenticated);
+    if(this.authService.authenticated){
+      this.authService.currentUser.subscribe(
+        value => {
+          console.log("Chat value> "+value);
+        },
+        error => {
+          console.error("Chat error> "+error);
+        }
+      );
+    }
   }
 
   getMessages(chatRoom:string){

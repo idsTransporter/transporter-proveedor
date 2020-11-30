@@ -32,7 +32,8 @@ export class AuthService {
     public toastController: ToastController,
     private storage: StorageService,
   ) {
-
+    //State
+    this.userFirebase = this.AFauth.authState;
   }
 
   /**
@@ -50,8 +51,7 @@ export class AuthService {
             console.log('Credential: ', res)
             console.log(typeof res);
 
-            //State
-            this.userFirebase = this.AFauth.authState;
+            
             console.log("auth value> "+this.userFirebase);
             console.log("auth type> "+ typeof(this.userFirebase));
 
