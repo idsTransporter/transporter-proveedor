@@ -69,12 +69,19 @@ export class HistorialPage implements OnInit {
   }
 
   async presentModal() {
+
+
+
     this.storage.getObject();//Sacado del Storage
+    
+    let dataService = {};
+    
+    
     const modal = await this.modalCtrl.create({
       component: HistorialDetallesComponent,
-      // componentProps: {
-      //   'politicas': res,
-      // },
+      componentProps: {
+        'information': dataService,
+      },
       swipeToClose: true,
       // presentingElement: this.routerOutlet.nativeEl
     });
