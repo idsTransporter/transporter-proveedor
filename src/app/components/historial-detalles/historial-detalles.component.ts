@@ -11,7 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class HistorialDetallesComponent implements OnInit {
 
   // Data passed in by componentProps
-  @Input() information: object;
+  @Input() information: any;
 
   map = null;
 

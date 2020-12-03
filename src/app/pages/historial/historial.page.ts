@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HistorialDetallesComponent } from 'src/app/components/historial-detalles/historial-detalles.component';
+import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -31,10 +32,21 @@ export class HistorialPage implements OnInit {
 
   rotateImg = 0;
 
+  public historial:any[]=[] ;
+  public ranking:number;
+
   constructor(
     private modalCtrl:ModalController,
     private storage: StorageService,
+    private httpService: HttpService,
   ) {
+    
+    let servicesList = this.httpService.getDetallesHistorial();
+    this.historial = servicesList.servicios;
+    this.ranking = servicesList.ranking;
+
+
+
     for (let i = 0; i < 1000; i++) {
       this.items.push({
         name: i + ' - ' + this.images[this.rotateImg],
@@ -68,13 +80,21 @@ export class HistorialPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentModal() {
+  async presentModal(item:any) {
 
-
+    console.log("El item..." + item);
+    console.log(item);
 
     this.storage.getObject();//Sacado del Storage
     
-    let dataService = {};
+    let dataService = {
+      inicio:item.detalles.inicio,
+      fin:item.detelles.fin,
+      fecha:item.fecha,
+      hora:item.hora,
+      metodoPago: item.detalles.metodoPago,
+      monto:item.detalles.monto
+    };
     
     
     const modal = await this.modalCtrl.create({

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {map} from 'rxjs/operators'
 import { ChatRoom } from '../interfaces/chat-room';
+import { User } from '../interfaces/user';
 import { AuthService } from './auth.service';
 
 
@@ -19,7 +20,9 @@ export class ChatService {
   private messagesCollection: AngularFirestoreCollection<any>;
   public messages: Observable<any[]>;
 
-
+  private subCurrentUser:Subscription;
+  public authUser;
+  public userInform:User;
 
 
   constructor(
@@ -29,6 +32,7 @@ export class ChatService {
   ) {
     this.chatCollection = this.afs.collection<any>('chatRoomsTest');
     this.chatRooms = this.chatCollection.snapshotChanges();
+    console.log("Chat...");
     this.getUserInformation();
    }
 
@@ -49,8 +53,9 @@ export class ChatService {
               let uidProv= uids[0];
               let uidOther= uids[1];
               
-              let uidCurrent = this.authService.userApp.uid;
-              console.log(this.authService.userApp);
+              // let uidCurrent = this.authService.userApp.uid;
+              let uidCurrent = this.userInform.uid;
+              // console.log(this.authService.userApp);
               return (uidCurrent===uidProv || uidCurrent==uidOther)
               
           });
@@ -62,9 +67,16 @@ export class ChatService {
   getUserInformation(){
     console.log(this.authService.authenticated);
     if(this.authService.authenticated){
-      this.authService.currentUser.subscribe(
+      this.subCurrentUser=this.authService.currentUser.subscribe(
         value => {
-          console.log("Chat value> "+value);
+          console.log("Chat value> ");
+          console.log(value);
+          this.authUser=value;
+          this.userInform = {
+            uid: value.uid,
+            email: value.email,
+            phoneNumber: '0989884022'
+          };
         },
         error => {
           console.error("Chat error> "+error);
@@ -83,7 +95,7 @@ export class ChatService {
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(
       {
         msg,
-        from: this.authService.userApp.uid,
+        from: this.userInform.uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }
     );

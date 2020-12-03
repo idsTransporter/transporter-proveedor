@@ -19,6 +19,7 @@ export class ChatPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("Chat page...");
     this.chatService.getUserInformation();
     this.chatService.getChatRooms().subscribe(
       chats => {

@@ -1,8 +1,13 @@
-<div class="ion-justify-content-between">
-  <ion-icon name = 'star' size='{{size}}' class="ion-justify-content-between"
-  *ngFor = 'let num of [1,2,3,4,5]' 
-  (click) = 'rate(num)' 
-  [ngStyle] = "{'color':getColor(num)}"
-  >
-  </ion-icon>
-</div>
+
+  <ion-row class="ion-justify-content-between ion-align-items-center">
+    <ion-col size='12' class="ion-justify-content-around" expand>
+      <ion-icon name = 'star' size='{{size}}' class="ion-justify-content-between"
+      *ngFor = 'let num of [1,2,3,4,5]' 
+      (click) = 'rate(num)' 
+      [ngStyle] = "{'color':getColor(num)}"
+      >
+      </ion-icon>
+    </ion-col>
+    
+  </ion-row>
+  

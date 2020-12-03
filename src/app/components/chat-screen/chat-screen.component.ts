@@ -44,7 +44,7 @@ export class ChatScreenComponent implements OnInit {
               createdAt:msg.createdAt,
               from: msg.from,
               msg: msg.msg,
-              myMsg: msg.from === this.authService.userApp.uid
+              myMsg: msg.from === this.chatService.userInform.uid
             };
 
             console.log('Message > ', message);
