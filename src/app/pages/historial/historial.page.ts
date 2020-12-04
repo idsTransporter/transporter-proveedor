@@ -88,8 +88,8 @@ export class HistorialPage implements OnInit {
     this.storage.getObject();//Sacado del Storage
     
     let dataService = {
-      inicio:item.detalles.inicio,
-      fin:item.detelles.fin,
+      inicio:JSON.stringify(item.detalles.inicio),
+      fin:JSON.stringify(item.detalles.fin),
       fecha:item.fecha,
       hora:item.hora,
       metodoPago: item.detalles.metodoPago,

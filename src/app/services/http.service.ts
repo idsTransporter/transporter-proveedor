@@ -34,10 +34,10 @@ export class HttpService {
           calificacion: 5,
           isFinished: true,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.2552256, "lng": -79.8926917},
+            fin: { "lat": -2.1290807, "lng": -79.8985233},
+            metodoPago: "Tarjeta de Credito",
+            monto: 4.32
           }
         },
         {
@@ -48,10 +48,10 @@ export class HttpService {
           calificacion: 5,
           isFinished: true,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.1452256, "lng": -79.8226919},
+            fin: { "lat": -2.2390807, "lng": -79.8935237},
+            metodoPago: "Tarjeta de Debito",
+            monto: 8.92
           }
         },{
           tipo:"Mudanza",
@@ -61,10 +61,10 @@ export class HttpService {
           calificacion: 3,
           isFinished: false,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.1652256, "lng": -79.8826919},
+            fin: { "lat": -2.2294507, "lng": -79.0085237},
+            metodoPago: "Tarjeta de Credito",
+            monto: 14.32
           }
         },{
           tipo:"Mudanza VIP",
@@ -74,10 +74,10 @@ export class HttpService {
           calificacion: 5,
           isFinished: true,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.1552256, "lng": -79.8126919},
+            fin: { "lat": -2.2290307, "lng": -79.8982237},
+            metodoPago: "Tarjeta de Credito",
+            monto: 9.60
           }
         },{
           tipo:"Mudanza Regularizada",
@@ -87,10 +87,10 @@ export class HttpService {
           calificacion: 1,
           isFinished: false,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.1552256, "lng": -79.8926919},
+            fin: { "lat": -2.2290807, "lng": -79.8985237},
+            metodoPago: "Tarjeta de Credito",
+            monto: 4.32
           }
         },{
           tipo:"Mudanza VIP",
@@ -100,10 +100,10 @@ export class HttpService {
           calificacion: 5,
           isFinished: true,
           detalles: {
-            inicio:{},
-            fin: {},
-            metodoPago: {},
-            monto: {}
+            inicio:{ "lat": -2.1552251, "lng": -79.8926219},
+            fin: { "lat": -2.2290803, "lng": -79.8985232},
+            metodoPago: "Tarjeta de Debito",
+            monto: 4.70
           }
         }
       ]
