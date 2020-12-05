@@ -22,6 +22,13 @@ export class HttpService {
     return this.http.get(`${this._API_URI}/police/${id}/`);
   }
 
+  getHistorialToUser(user:string){
+    return this.http.get(
+      `${this._API_URI}/history/service/provider/`,
+      {params:{email:user}}
+    );
+  }
+
   getDetallesHistorial(){
     return {
       ranking:3,

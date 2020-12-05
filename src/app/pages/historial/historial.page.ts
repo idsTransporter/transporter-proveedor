@@ -35,6 +35,8 @@ export class HistorialPage implements OnInit {
   public historial:any[]=[] ;
   public ranking:number;
 
+  public isEmpty:boolean=false;
+
   constructor(
     private modalCtrl:ModalController,
     private storage: StorageService,
@@ -46,6 +48,11 @@ export class HistorialPage implements OnInit {
     this.ranking = servicesList.ranking;
 
 
+    this.httpService.getHistorialToUser('bryan97santos@gmail.com').subscribe(
+      res => {
+        console.log(res);
+      }
+    );
 
     for (let i = 0; i < 1000; i++) {
       this.items.push({

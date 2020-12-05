@@ -2,14 +2,67 @@
 
 </app-header-back>
 
-<ion-toolbar>
-  <ion-title>RANKING</ion-title>
-  <ion-item text-align='center' lines="full">
-    <app-rating rating=4 size="large"></app-rating>
-  </ion-item>
-</ion-toolbar>
+<div padding *ngIf="isEmpty; then EMPTY else FULL" class='ion-align-items-center'>
 
-<ion-content padding>
+</div>
+
+<!-- En el caso de que la lista de servicios este vacia. -->
+<ng-template #EMPTY>
+  <ion-content padding>
+    <div  class="ion-text-center ion-padding">
+      <ion-label color="light">
+        No ha realizado ningun servicio.
+      </ion-label>
+    </div>
+  </ion-content>
+</ng-template>
+
+<ng-template #FULL>
+  <ion-toolbar>
+    <ion-title>RANKING</ion-title>
+    <ion-item text-align='center' lines="full">
+      <app-rating rating=4 size="large"></app-rating>
+    </ion-item>
+  </ion-toolbar>
+  <ion-content>
+    <div>
+      <ion-virtual-scroll [items]="historial" approxItemHeight="100px">
+        <ion-card *virtualItem="let item; let itemBounds = bounds;" (click)="presentModal(item)">
+
+          <ion-item>
+            <ion-title class=" minimo">
+              {{item.tipo}} - {{item.cliente}}
+              <ion-label> {{item.fecha}} </ion-label>
+            </ion-title>
+            <app-rating rating=4 size="small"></app-rating>
+            <ion-icon [name]="item.isFinished ? 'checkmark-outline' : 'close-outline' " slot='end'></ion-icon>
+          </ion-item>
+
+        </ion-card>
+      </ion-virtual-scroll>
+    </div>
+
+  </ion-content>
+
+</ng-template>
+
+<!-- 
+  <div>
+    <ion-virtual-scroll [items]="items" approxItemHeight="310px">
+      <ion-card *virtualItem="let item; let itemBounds = bounds;" (click)="presentModal()">
+        <div>
+          <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ item.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{ item.content }}</ion-card-content>
+      </ion-card>
+    </ion-virtual-scroll>
+  </div> -->
+
+
+
 <!--   
   <ion-item (click)="presentModal()">
     <ion-title>
@@ -43,36 +96,3 @@
       </ion-item>
     </ion-card-content>
   </ion-card> -->
-
-  <div>
-    <ion-virtual-scroll [items]="historial" approxItemHeight="100px">
-      <ion-card *virtualItem="let item; let itemBounds = bounds;" (click)="presentModal(item)">
-        
-          <ion-item >
-            <ion-title class = " minimo">
-              {{item.tipo}} - {{item.cliente}}
-              <ion-label> {{item.fecha}} </ion-label>
-            </ion-title>
-            <app-rating rating=4 size="small"></app-rating>
-            <ion-icon [name]="item.isFinished ? 'checkmark-outline' : 'close-outline' " slot='end'></ion-icon>
-          </ion-item>
-        
-      </ion-card>
-    </ion-virtual-scroll>
-  </div>
-
-  <div>
-    <ion-virtual-scroll [items]="items" approxItemHeight="310px">
-      <ion-card *virtualItem="let item; let itemBounds = bounds;" (click)="presentModal()">
-        <div>
-          <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
-        </div>
-        <ion-card-header>
-          <ion-card-title>{{ item.name }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>{{ item.content }}</ion-card-content>
-      </ion-card>
-    </ion-virtual-scroll>
-  </div>
-
-</ion-content>

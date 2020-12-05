@@ -22,6 +22,8 @@ export class HistorialDetallesComponent implements OnInit {
   origin = { lat: -2.148250, lng: -79.965125 };
   destination = { lat: -2.148250, lng: -79.965180 };
 
+  
+
   constructor(
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
