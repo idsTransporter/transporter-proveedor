@@ -9,6 +9,9 @@ import { ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
 
+// Almacenar la infor del usuario
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,9 @@ export class AuthService {
 
   private userInfor: Observable<firebase.User>;
   public userApp: User;
-  public currentUser:any;
+  public currentUser: any;
+
+  private user;
 
   constructor(
     private AFauth: AngularFireAuth,
@@ -26,7 +31,7 @@ export class AuthService {
   ) {
     this.getUserInformation();
     this.getCurrentUser();
-   }
+  }
 
   /**
    * Login de respuesta asincrona que en caso de ser exitosa 
@@ -40,7 +45,8 @@ export class AuthService {
       (resolve, reject) => {
         this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
           .then(res => {
-            console.log('Credential: ',res)
+            console.log('Credential: ', res)
+            this.setObject(res.user);
             resolve(res)
           }).catch(
             err => {
@@ -61,6 +67,7 @@ export class AuthService {
   logout() {
     return this.AFauth.signOut()
       .then(() => {
+        this.clear();
         this.router.navigate(['/login'])
         console.log('Redirigir')
       }
@@ -108,28 +115,53 @@ export class AuthService {
     toast.present();
   }
 
-  getUserInformation(){
-    this.userInfor= this.AFauth.user;
+  getUserInformation() {
+    this.userInfor = this.AFauth.user;
 
     this.userInfor.subscribe(
-      user =>{
-        console.log('Infor > ',user);
-        this.userApp={
-          uid:user.uid,
-          email:user.email,
-          phoneNumber:user.phoneNumber,
+      user => {
+        console.log('Infor > ', user);
+        this.userApp = {
+          uid: user.uid,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
         }
       }
     );
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     this.AFauth.onAuthStateChanged(
       user => {
-        console.log('Change: ',user);
+        console.log('Change: ', user);
         this.currentUser = user;
       }
     );
     return this.currentUser;
+  }
+
+  // JSON "set" example
+  async setObject(user) {
+    await Storage.set({
+      key: user.uid,
+      value: JSON.stringify({
+        uid: user.uid,
+        name: user.email.split('@')[0],
+
+      })
+    });
+    console.log("se ha guardado");
+  }
+
+  // JSON "get" example
+  async getObject() {
+    const ret = await Storage.get({ key: this.user.uid });
+    console.log("se ha extraido");
+    return JSON.parse(ret.value);
+  }
+
+  async clear() {
+    await Storage.clear();
+    console.log("CLEAR");
   }
 }

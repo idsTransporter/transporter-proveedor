@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 
 //Para usar llamadas nativas
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { TrackingService } from 'src/app/services/tracking.service';
 
 declare var google;
 
@@ -55,6 +56,7 @@ export class DetallePage implements OnInit,OnDestroy {
     private detalle:DetalleServicioService,
     public popoverController: PopoverController,
     private callNumber: CallNumber,
+    private trackingServ:TrackingService,
     ) {
   }
   ngOnDestroy(){
@@ -137,6 +139,9 @@ export class DetallePage implements OnInit,OnDestroy {
         console.log("entro");
       }
       if ("coords" in data){
+//Tracking
+        this.trackingServ.initTracking(data);
+        
         let lat=data.coords.latitude;
         let lng=data.coords.longitude;
         console.log("latitud "+ lat);
