@@ -8,10 +8,7 @@ import { isNullOrUndefined } from 'util';
 import { ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
-
-// Almacenar la infor del usuario
-import { Plugins } from '@capacitor/core';
-const { Storage } = Plugins;
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +20,13 @@ export class AuthService {
   public currentUser: any;
 
   private user;
+  public KEY_USER:string;
 
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController, 
+    private storageServ: StorageService,
   ) {
     this.getUserInformation();
     this.getCurrentUser();
@@ -40,13 +39,17 @@ export class AuthService {
    * @contrasenia
    * @returns una promesa con estados resolve (exito) y reject (fallida).
    */
-  login(correo_electronico: string, contrasenia: string) {
+  async login(correo_electronico: string, contrasenia: string) {
     return new Promise(
       (resolve, reject) => {
         this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
           .then(res => {
+
             console.log('Credential: ', res)
-            this.setObject(res.user);
+            this.KEY_USER = res.user.uid;
+            this.setUserInform(res.user);
+            //this.setObject(res.user);
+            //this.getObject();
             resolve(res)
           }).catch(
             err => {
@@ -67,7 +70,7 @@ export class AuthService {
   logout() {
     return this.AFauth.signOut()
       .then(() => {
-        this.clear();
+        //this.clear();
         this.router.navigate(['/login'])
         console.log('Redirigir')
       }
@@ -140,28 +143,29 @@ export class AuthService {
     return this.currentUser;
   }
 
-  // JSON "set" example
-  async setObject(user) {
-    await Storage.set({
-      key: user.uid,
-      value: JSON.stringify({
-        uid: user.uid,
-        name: user.email.split('@')[0],
-
-      })
+  setUserInform(user) {
+    //this.storageServ.setString('name', this.name);
+    this.storageServ.setObject(user.uid, {
+      uid: user.uid,
+      email: user.email.split('@')[0],
     });
-    console.log("se ha guardado");
   }
 
-  // JSON "get" example
-  async getObject() {
-    const ret = await Storage.get({ key: this.user.uid });
-    console.log("se ha extraido");
-    return JSON.parse(ret.value);
+  // getStorageUser() {
+  //   // this.storageServ.getString('name').then((data: any) => {
+  //   //   if (data.value) {
+  //   //     this.storageName = data.value;
+  //   //   }
+  //   // });
+  //   this.storageServ.getObject('user')
+  //   .then((data: any) => {
+  //     this.person = data;
+  //   });
+  // }
+
+  clearStorage() {
+    this.storageServ.clear();
   }
 
-  async clear() {
-    await Storage.clear();
-    console.log("CLEAR");
-  }
+
 }

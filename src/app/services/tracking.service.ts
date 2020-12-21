@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 // For RealTime DB
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AuthService } from './auth.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,29 +10,30 @@ import { AuthService } from './auth.service';
 export class TrackingService {
 
   listRef: AngularFireList<any>;
-  private watch:any;
-  user;
+  private watch: any;
+  user: any;
 
   constructor(
-    private geolocation: Geolocation,
+    //private geolocation: Geolocation,
     db: AngularFireDatabase,
     private userAuth: AuthService,
   ) {
-    this.user = this.userAuth.getObject();
-    if(!this.user){
+    if( !this.userAuth.KEY_USER ) {
       return;
     }
-    this.listRef= db.list('/users/');
-   }
+   this.listRef = db.list("/usuarios/");
+  }
 
-  initTracking(data){
-    if( !this.user.uid ) {
+
+  initTracking(data) {
+    console.log("EL UID DE ERROR> " + this.userAuth.KEY_USER);
+    if (!this.userAuth.KEY_USER) {
       console.log('ERROR en el UID');
       return;
     }
 
-    let clave = this.user.clave;
-    this.listRef.update( clave, {lat: data.coords.latitude, lng: data.coords.longitude } );
+    let clave = this.userAuth.KEY_USER;
+    this.listRef.update(clave, { lat: data.coords.latitude, lng: data.coords.longitude });
 
 
     // let clave = this.us.clave;
