@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams,PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router'
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
   selector: 'app-popover-fin',
@@ -12,7 +13,7 @@ export class PopoverFinComponent implements OnInit {
   body;
   btn;
   watch:any;
-  constructor(private router: Router,private navParams: NavParams, private popover:PopoverController) {
+  constructor(private router: Router,private navParams: NavParams, private popover:PopoverController,private trackingServ:TrackingService) {
     this.title=this.navParams.get("title");
     this.body=this.navParams.get("body");
     this.btn=this.navParams.get("btn");
@@ -44,6 +45,7 @@ export class PopoverFinComponent implements OnInit {
   async finalizarServicio(){
     console.log('CARRERA FINALIZADA');
           this.stopWatch();
+          this.trackingServ.detener_watch();
           //this.detalle.geocodeLatLng();          
           this.bloquearFin();
           await this.popover.dismiss();
