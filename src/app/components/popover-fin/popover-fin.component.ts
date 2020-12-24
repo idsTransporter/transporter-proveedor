@@ -33,6 +33,7 @@ export class PopoverFinComponent implements OnInit {
 
   private stopWatch(){
     this.watch=null;
+    
   }
 
  /* async iniciarServicio(){
@@ -46,8 +47,10 @@ export class PopoverFinComponent implements OnInit {
     console.log('CARRERA FINALIZADA');
           this.stopWatch();
           this.trackingServ.detener_watch();
+          console.log('pasó detener watch');
           //this.detalle.geocodeLatLng();          
           this.bloquearFin();
+           
           await this.popover.dismiss();
           this.router.navigate(['/tabs']);
           

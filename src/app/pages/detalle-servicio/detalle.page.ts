@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
 
+import { AuthService } from 'src/app/services/auth.service';
+
 //Para usar llamadas nativas
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { TrackingService } from 'src/app/services/tracking.service';
@@ -69,6 +71,9 @@ export class DetallePage implements OnInit,OnDestroy {
   ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
+    console.log("Estoy dentro jajajaj");
+    this.trackingServ.sendInfo(this.shareData);
+    console.log("envió datos");
   }
 
 
@@ -256,6 +261,7 @@ export class DetallePage implements OnInit,OnDestroy {
     return await popover.present();
   }
   
+
   
 
 }

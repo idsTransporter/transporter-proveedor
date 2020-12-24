@@ -12,6 +12,7 @@ export class TrackingService {
   listRef: AngularFireList<any>;
   private watch: any;
   user: any;
+  emailUser:string;
 
   constructor(
     //private geolocation: Geolocation,
@@ -22,11 +23,13 @@ export class TrackingService {
       return;
     }
    this.listRef = db.list("/usuarios/");
+   this.emailUser=this.userAuth.userApp.email;
   }
 
 
   initTracking(data) {
     console.log("EL UID DE ERROR> " + this.userAuth.KEY_USER);
+    console.log("Email usuario", this.emailUser)
     if (!this.userAuth.KEY_USER) {
       console.log('ERROR en el UID');
       return;
@@ -43,7 +46,17 @@ export class TrackingService {
   }
 
   detener_watch() {
-    this.watch.unsubscribe();
+    //this.watch.unsubscribe();
+    this.listRef.remove(this.userAuth.KEY_USER);
+  }
+
+
+  sendInfo(servicio){
+    let clave = this.userAuth.KEY_USER;
+    this.listRef.update(clave, {email: this.emailUser, inicio: servicio.inicio, fin: servicio.fin,
+       hora: servicio.detalleServicio.data.hora, metodoPago:servicio.detalleServicio.data.metodoPago,
+      valor: servicio.detalleServicio.data.valor});
+      console.log("Enviado: ",servicio.inicio, servicio.detalleServicio.data.valor);
   }
 
 }
